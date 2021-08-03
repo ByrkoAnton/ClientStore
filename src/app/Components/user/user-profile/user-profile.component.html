@@ -1,0 +1,97 @@
+<div class="grid align__item">
+    <div class="user-profile">
+
+        <img src="https://freepngimg.com/thumb/fallout/81356-head-human-fallout-behavior-png-file-hd.png" width="50px">
+        <h2>Profile</h2>
+        <form action="" method="post" class="form">
+            <form [formGroup]="userForm">
+                <div class="form-group">
+                    <div class="error-messages">
+                        <ng-container *ngFor="let error of error_messages.userFirstName">
+                            <div class="error-message"
+                                *ngIf="userForm.get('userFirstName')?.hasError(error.type) && (userForm.get('userFirstName')?.dirty || userForm.get('userFirstName')?.touched)">
+                                {{error.message}}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <input formControlName="userFirstName" type="text" placeholder="First Name" /><br>
+                </div>
+
+                <div class="form-group">
+                    <div class="error-messages">
+                        <ng-container *ngFor="let error of error_messages.userLastName">
+                            <div class="error-message"
+                                *ngIf="userForm.get('userLastName')?.hasError(error.type) && (userForm.get('userLastName')?.dirty || userForm.get('userLastName')?.touched)">
+                                {{error.message}}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <input formControlName="userLastName" type="text" placeholder="Last Name" /><br>
+                </div>
+
+                <div class="form-group">
+                    <div class="error-messages">
+                        <ng-container *ngFor="let error of error_messages.userEmail">
+                            <div class="error-message"
+                                *ngIf="userForm.get('userEmail')?.hasError(error.type) && (userForm.get('userEmail')?.dirty || userForm.get('userEmail')?.touched)">
+                                {{error.message}}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <input formControlName="userEmail" type="email" placeholder="Email" /><br>
+                </div>
+            </form>
+
+            <form [formGroup]="changePasswordForm">
+
+                <div class="form-group">
+                    <div class="error-messages">
+                        <ng-container *ngFor="let error of error_messages.newPassword">
+                            <div class="error-message"
+                                *ngIf="changePasswordForm.get('newPassword')?.hasError(error.type) && (changePasswordForm.get('newPassword')?.dirty || changePasswordForm?.get('newPassword')?.touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <input class="new-password-input" formControlName="newPassword" type="password"
+                        placeholder="Enter new password" />
+                </div>
+
+                <div class="form-group">
+                    <div *ngIf="this.changePasswordForm.get('newPassword')?.value !== '' " class="error-messages">
+                        <ng-container *ngFor="let error of error_messages.confirmPassword">
+                            <div class="error-message"
+                                *ngIf=" changePasswordForm.get('confirmPassword')?.hasError(error.type) && (changePasswordForm.get('confirmPassword')?.dirty || changePasswordForm?.get('confirmPassword')?.touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+
+                        <ng-container>
+                            <div class="error-message"
+                                *ngIf="changePasswordForm.hasError('passwordNotMatch') && (changePasswordForm.get('confirmPassword')?.dirty || changePasswordForm.get('confirmPassword')?.touched)">
+                                <a>Passwords are not match</a>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <input class="confirmPassword-input" formControlName="confirmPassword" type="password"
+                        placeholder="Confirm new password" />
+                </div>
+                <div class="form-group">
+                    <div *ngIf="this.changePasswordForm.get('newPassword')?.value !== '' " class="error-messages">
+                        <ng-container *ngFor="let error of error_messages.currentPassword">
+                            <div class="error-message"
+                                *ngIf="changePasswordForm.get('currentPassword')?.hasError(error.type) && (changePasswordForm.get('currentPassword')?.dirty || changePasswordForm?.get('currentPassword')?.touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <input class="currentPassword-input" formControlName="currentPassword" type="password"
+                        placeholder="Enter current password" />
+                </div>
+            </form>
+        </form>
+        <br><button class="button" (click)="userUpdate()" (click)="changePassword()" [disabled]="!userForm.valid">Save
+            changes</button>
+        <button class="button" (click)="Edit()">Edit</button>
+    </div>
+</div>

@@ -1,0 +1,117 @@
+<nav class="navbar navbar-custom">
+    <a class="headerbook" routerLink="/store">
+        <img src="https://freepngimg.com/thumb/book/5-red-book-png-image-image.png" width="50" height="35"
+            class="d-inline-block align-top" alt="">
+        Book Store
+    </a>
+
+    <form class="form-inline">
+        <input class="form-control" [(ngModel)]="search" [ngModelOptions]="{standalone: true}" type="search"
+            placeholder="Search" aria-label="Search" (ngModelChange)="this.userQuestionUpdate.next($event)">
+
+        <ng-container *ngIf="!isAuthenticated">
+            <a class="navbar-brand" routerLink="/signin">
+                <img src="https://image.flaticon.com/icons/png/512/3596/3596085.png" width="30" height="25">
+                Sign In </a>
+        </ng-container>
+
+        <ng-container *ngIf="isAuthenticated">
+            <a class="navbar-brand" routerLink="/getuser">
+                <img src="https://image.flaticon.com/icons/png/512/3076/3076343.png" width="30" height="25">
+                Profile </a>
+            <a class="navbar-brand" routerLink="/#">
+                <img src="https://image.flaticon.com/icons/png/512/2543/2543369.png" width="30" height="25">
+                Cart</a>
+            <a class="navbar-brand" routerLink="javascript:void(0)" (click)="signOut()">
+                <img src="https://image.flaticon.com/icons/png/512/857/857682.png" width="30" height="25">
+                Sign Out </a>
+        </ng-container>
+    </form>
+</nav>
+
+<section id="store">
+    <nav>
+        <a class="filtr">Sort by </a>
+        <select class="sortSelect" (change)="sortChange($event)">
+            <a>Sort by <br></a>
+            <option value="price asc" selected>Price low to hight</option>
+            <option value="price des">Price hight to low</option>
+            <option value="title asc">Title A-Z</option>
+            <option value="title des">Title Z-A</option>
+        </select>
+        <a class="filtr">Currency </a>
+        <select class="sortSelect" (change)="currencyTypeChange($event)">
+            <a>Sort by <br></a>
+            <option value="USD" selected>USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="CHF">CHF</option>
+            <option value="JPY">JPY</option>
+            <option value="UAH">UAH</option>
+        </select>
+        <fieldset class="sortSelect">
+            <legend>Categories</legend>
+            <input type="checkbox" value="1" checked [checked] (change)="editionTypeChange($event);">
+            <label>Books</label><br>
+            <input type="checkbox" value="2" checked [checked] (change)="editionTypeChange($event);">
+            <label> Magazines</label><br>
+            <input type="checkbox" value="3" checked [checked] (change)="editionTypeChange($event);">
+            <label>Newspapers</label>
+        </fieldset>
+
+        <ng-container>
+            <div class="slider">
+                <ng-container *ngIf="showDefaultSlider">
+                    <input class="price-input" (mouseenter)="changeSlider()" [(ngModel)]="sliderValueDefault">
+                    <a class="price-input">—</a>
+                    <input class="price-input" (mouseenter)="changeSlider()" [(ngModel)]="sliderHighValueDefault">
+                    <button class="ok-вutton" (mouseenter)="changeSlider()">Ok</button>
+                    <ngx-slider (mouseenter)="changeSlider()" [(value)]="sliderValueDefault"
+                        [(highValue)]="sliderHighValueDefault" [options]="options">
+                    </ngx-slider>
+                </ng-container>
+                <ng-container *ngIf="!showDefaultSlider">
+                        <input  class="price-input" type="number" min="0" [(ngModel)]="inputValueForQuery" (ngModelChange) ="validatePriceInputs()">
+                        <a class="price-input">—</a>
+                        <input class="price-input" type="number" [(ngModel)]="inputHighValueForQuery" (ngModelChange) ="validatePriceInputs()">
+                   
+                    <button class="ok-вutton" (click)="priceChangeByInput()" [disabled]="!isPriceInputsValid">Ok</button>
+                    <ngx-slider [(value)]="sliderValueForQuery" [(highValue)]="sliderHighValueForQuery"
+                    [options]="options" (userChangeEnd)="priceChangeBySlider() ; validatePriceInputs()" (userChange)="makePriceInputsSameAsSlider()">
+                </ngx-slider>
+            </ng-container>
+            </div>
+        </ng-container>
+    </nav>
+
+    <main>
+        <section class="our-webcoderskull padding-lg">
+            <div class="container">
+                <ul class="row">
+                    <li *ngFor="let edition of editions$ | async" class="col-12 col-md-6 col-lg-3">
+                        <div class="cnt-block equal-hight" style="height: 349px;" (click) ="sroreCurrentEditionId(edition.id)">
+                            <figure><img src="https://freepngimg.com/thumb/book/5-red-book-png-image-image.png">
+                            </figure>
+                            <h3><a routerLink>{{edition.title}}</a></h3>
+                            <div id="parent">
+                                <div id="child">
+                                    <div style="z-index:-1;" *ngFor="let author of edition.authorModels, let i = index">
+                                        <a>{{author.name}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="price">
+                                <a>{{edition?.price}}</a>
+                                <a class="currencyLable" [innerHTML]="currencyLable"></a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <div class="navigation">
+            <ngb-pagination [collectionSize]="fullCounts" [(page)]="page" [pageSize]="countElementOnPage" [maxSize]="4"
+                (pageChange)= "makePagination()" [boundaryLinks]="true"></ngb-pagination>
+        </div>
+    </main>
+</section>

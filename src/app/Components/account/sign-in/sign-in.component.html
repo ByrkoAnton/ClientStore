@@ -1,0 +1,43 @@
+<div class="grid align__item">
+    <div class="sign-in">
+
+        <img src="https://freepngimg.com/thumb/book/5-red-book-png-image-image.png" width="100px">
+        <h2>Sign In</h2>
+
+        <form action="" method="post" class="form">
+            <form [formGroup]="signInForm">
+                <div class="form__field">
+                    <div class="error-messages">
+                        <ng-container *ngFor="let error of error_messages.email">
+                            <div class="error-message" *ngIf="signInForm.get('email')?.hasError(error.type) && 
+                            (signInForm.get('email')?.dirty || signInForm.get('email')?.touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <input formControlName="email" type="email" placeholder="info@mailaddress.com">
+                </div>
+                <div class="form__field">
+                    <div class="error-messages">
+                        <ng-container *ngFor="let error of error_messages.password">
+                            <div class="error-message"
+                                *ngIf="signInForm.get('password')?.hasError(error.type) && (signInForm.get('password')?.dirty || signInForm?.get('password')?.touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <input formControlName="password" type="password" placeholder="•••••••••" />
+                </div>
+                <div class="forgot-password">
+                    <a routerLink="/forgotpassword">Forgot your password?</a>
+                </div>
+                <br>
+                <div class="form__field">
+                    <br><button class="signInButton" (click)="signIn()"
+                        [disabled]="!signInForm.valid">Sign In</button><br><br>
+                </div>
+            </form>
+        </form>
+        <p>Don't have an accout? <a routerLink="/signup">Sign Up</a></p>
+    </div>
+</div>

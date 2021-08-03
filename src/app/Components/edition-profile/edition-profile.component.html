@@ -1,0 +1,56 @@
+
+<nav class="navbar navbar-custom">
+    <a class="headerbook" routerLink="/store">
+        <img src="https://freepngimg.com/thumb/book/5-red-book-png-image-image.png" width="50" height="35"
+            class="d-inline-block align-top" alt="">
+        Book Store
+    </a>
+    <form class="form-inline">
+
+        <ng-container *ngIf="!isAuthenticated">
+            <a class="navbar-brand" routerLink="/signin">
+                <img src="https://image.flaticon.com/icons/png/512/3596/3596085.png" width="30" height="25">
+                Sign In </a>
+        </ng-container>
+
+        <ng-container *ngIf="isAuthenticated">
+            <a class="navbar-brand" routerLink="/getuser">
+                <img src="https://image.flaticon.com/icons/png/512/3076/3076343.png" width="30" height="25">
+                Profile </a>
+            <a class="navbar-brand" routerLink="/#">
+                <img src="https://image.flaticon.com/icons/png/512/2543/2543369.png" width="30" height="25">
+                Cart</a>
+            <a class="navbar-brand" routerLink="javascript:void(0)" (click)="signOut()">
+                <img src="https://image.flaticon.com/icons/png/512/857/857682.png" width="30" height="25">
+                Sign Out </a>
+        </ng-container>
+    </form>
+</nav>
+<div class="edition-profile">
+    <div class="pic">
+        <img src="https://freepngimg.com/thumb/book/5-red-book-png-image-image.png" width="90%" height="90%">
+    </div >
+    <div class="edition">
+        <ng-container *ngIf="edition$ | async as edition">
+            <h3>{{edition.title}}</h3>
+            <a>Authors:</a>
+            <div class="authos-list" *ngFor="let author of edition.authorModels, let i = index">
+                <li>{{author.name}}</li>
+            </div>
+            <br><a>Description:</a>
+            <div class = "description">
+                <p>{{edition.description}}</p>
+            </div>   
+        </ng-container>
+    </div>
+    <div class class="actions">
+        <a> Qty: </a>
+        <input  class="price-input" type="number" min="1" step="1" onkeydown="return false" value="1" [(ngModel)]="editionQty">
+        <ng-container *ngIf="edition$ | async as edition">
+            <ng-container *ngIf="edition.price !== null">
+            <a class="price">$ {{edition.price * editionQty}}</a>
+        </ng-container>
+        </ng-container> 
+        <br><button (click)="addToCart()">Add to cart</button>
+    </div>
+</div>

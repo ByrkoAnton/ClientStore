@@ -1,0 +1,99 @@
+.navbar-custom {
+    .headerbook {
+      color: rgb(255, 255, 255);
+      text-decoration: none;
+      font-size: 22px;
+    }
+    background-color: rgb(4, 136, 4);
+  
+    .navbar-brand {
+      margin-left: 25px;
+      margin-right: 35px;
+      font-size: 16px;
+      color: rgb(255, 255, 255);
+    }
+  }
+ 
+  html{
+    background-color: honeydew;
+  }
+  
+  .authos-list{
+      margin-left: 7%;
+      font-size: 16px;
+
+  }
+
+  .edition-profile {
+      display: flex;
+      width: 90%;
+      margin-top: 2%;
+      margin-left: 5%;
+      margin-right: 5%;
+      
+
+  }
+  .pic{
+    //background: #b0e0bf;
+    width: 30%; 
+  }
+  .edition{
+    //background: #e7f5db;
+    width: 55%; 
+    a{
+      color: rgba(10, 1, 22, 0.418);
+    }
+  }
+  .actions{
+    //background: #84a3f8;
+    width: 15%; 
+    margin-left: 5%;
+    .price{
+      color:green;
+      margin-left: 5%;
+      font-size: 25px;
+      font-weight: 700;
+    }
+
+    button{
+      background-image: linear-gradient(160deg, #8ceabb 0%, #378f7b 100%);
+      color: rgb(247, 242, 242);
+      border-radius: 15%;
+      text-align: center;
+      width: 90%;
+      margin-top: 10%;
+
+    }
+    button:hover {
+      color: rgb(14, 13, 13);
+    }
+
+    input {
+      color: transparent;
+      text-shadow: 0 0 0 #00060a;
+      &:focus {
+          outline: none;
+      }
+    }
+  }
+
+  .description
+  {
+    margin-left: 10%;
+    font-size: 16px;
+  }
+
+  h3{
+    color: rgb(67, 2, 245);
+    margin-left: 5%;
+  }
+
+  .price-input {
+    width: 30%;
+    margin-top: 50%;
+    border-radius: 10%;
+   
+  }
+  
+
+  

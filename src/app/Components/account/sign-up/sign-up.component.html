@@ -1,0 +1,82 @@
+<div class="grid align__item">
+    <div class="register">
+
+        <img src="https://freepngimg.com/thumb/book/5-red-book-png-image-image.png" width="100px">
+        <h2>Sign Up</h2>
+
+        <form action="" method="post" class="form">
+            <form [formGroup]="signUpForm">
+                <div class="form__field">
+                    <div class="error-messages">
+                        <ng-container *ngFor="let error of error_messages.firstName">
+                            <div class="error-message"
+                                *ngIf="signUpForm.get('firstName')?.hasError(error.type) && (signUpForm.get('firstName')?.dirty || signUpForm.get('firstName')?.touched)">
+                                {{error.message}}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <input formControlName="firstName" type="text" placeholder="First Name" /><br>
+                </div>
+
+                <div class="form__field">
+                    <div class="error-messages">
+                        <ng-container *ngFor="let error of error_messages.lastName">
+                            <div class="error-message"
+                                *ngIf="signUpForm.get('lastName')?.hasError(error.type) && (signUpForm.get('lastName')?.dirty || signUpForm.get('lastName')?.touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <input formControlName="lastName" type="text" placeholder="Last Name" />
+                </div>
+
+                <div class="form__field">
+                    <div class="error-messages">
+                        <ng-container *ngFor="let error of error_messages.email">
+                            <div class="error-message" *ngIf="signUpForm.get('email')?.hasError(error.type) && 
+    (signUpForm.get('email')?.dirty || signUpForm.get('email')?.touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <input formControlName="email" type="email" placeholder="info@mailaddress.com" />
+                </div>
+
+                <div class="form__field">
+                    <div class="error-messages">
+                        <ng-container *ngFor="let error of error_messages.password">
+                            <div
+                                *ngIf="signUpForm.get('password')?.hasError(error.type) && (signUpForm.get('password')?.dirty || signUpForm?.get('password')?.touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <input class="password-input" formControlName="password" type="password" placeholder="Password" />
+                </div>
+
+                <div class="form__field">
+                    <div class="error-messages">
+                        <ng-container *ngFor="let error of error_messages.confirmPassword">
+                            <div
+                                *ngIf="signUpForm.get('confirmPassword')?.hasError(error.type) && (signUpForm.get('confirmPassword')?.dirty || signUpForm.get('confirmPassword')?.touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="error-messages">
+                        <ng-container
+                            *ngIf="signUpForm.hasError('passwordNotMatch') && (signUpForm.get('confirmPassword')?.dirty || signUpForm.get('confirmPassword')?.touched)">
+
+                            <a>Passwords are not match</a>
+                        </ng-container>
+                    </div>
+                    <input class="confirmPassword-input " formControlName="confirmPassword" type="password"
+                        placeholder="Confirm password" />
+                </div>
+            </form>
+        </form>
+        <br><button class="signInButton" (click)="signUp()" [disabled]="!signUpForm.valid || requestSend">Sign
+            Up</button><br><br>
+        <p>Already have an accout? <a routerLink="/signin">Sign In</a></p>
+    </div>
+</div>
