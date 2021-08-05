@@ -1,0 +1,33 @@
+<nav class="navbar navbar-custom">
+    <a class="headerbook" routerLink="/store">
+        <img src="https://freepngimg.com/thumb/book/5-red-book-png-image-image.png" width="50" height="35"
+            class="d-inline-block align-top" alt="">
+        Book Store
+    </a>
+
+    <form class="form-inline">
+        <ng-container *ngIf="!isAuthenticated">
+            <a class="navbar-brand" routerLink="/#">
+                <img src="https://image.flaticon.com/icons/png/512/2543/2543369.png" width="30" height="25">
+                Cart</a>
+            <a class="navbar-brand" routerLink="/signin">
+                <img src="https://image.flaticon.com/icons/png/512/3596/3596085.png" width="30" height="25">
+                Sign In </a>
+        </ng-container>
+
+        <ng-container *ngIf="isAuthenticated">
+            <a class="navbar-brand" routerLink="/getuser">
+                <img src="https://image.flaticon.com/icons/png/512/3076/3076343.png" width="30" height="25">
+                Profile </a>
+                
+            <a class="navbar-brand" routerLink="/#">
+                <ng-container class ="items" *ngIf="!isCartEmpty">
+                    <span class ="items"><a>{{cartItemsCount$ | async}}</a></span></ng-container>
+                <img src="https://image.flaticon.com/icons/png/512/2543/2543369.png" width="30" height="25">
+                Cart</a>
+            <a class="navbar-brand" routerLink="javascript:void(0)" (click)="signOut()">
+                <img src="https://image.flaticon.com/icons/png/512/857/857682.png" width="30" height="25">
+                Sign Out </a>
+        </ng-container>
+    </form>
+</nav>

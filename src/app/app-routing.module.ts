@@ -7,6 +7,7 @@ import { SignOutComponent } from './Components/account/sign-out/sign-out.compone
 import { SignUpSuccessComponent } from './Components/account/sign-up-success/sign-up-success.component';
 import { SignUpComponent } from './Components/account/sign-up/sign-up.component';
 import { EditionProfileComponent } from './Components/edition-profile/edition-profile.component';
+import { NavbarComponent } from './Components/navbar/navbar.component';
 import { StoreComponent } from './Components/store/store.component';
 import { UserProfileComponent } from './Components/user/user-profile/user-profile.component';
 import { AuthGuard } from './Guards/auth.guard';
@@ -20,7 +21,8 @@ const routes: Routes = [
 {path: 'resetpasswordsuccess', component: ResetPasswordSuccessComponent},
 {path: 'signout', component: SignOutComponent},
 {path: 'getuser', component: UserProfileComponent, canActivate: [AuthGuard]},
-{path: 'editionprofile', component: EditionProfileComponent}
+{path: 'editionprofile', component: EditionProfileComponent},
+{path: 'navbar', component: NavbarComponent}
 ];
 
 

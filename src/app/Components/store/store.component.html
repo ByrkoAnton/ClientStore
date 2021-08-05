@@ -1,4 +1,4 @@
-<nav class="navbar navbar-custom">
+<!-- <nav class="navbar navbar-custom">
     <a class="headerbook" routerLink="/store">
         <img src="https://freepngimg.com/thumb/book/5-red-book-png-image-image.png" width="50" height="35"
             class="d-inline-block align-top" alt="">
@@ -27,19 +27,21 @@
                 Sign Out </a>
         </ng-container>
     </form>
-</nav>
+</nav> -->
 
 <section id="store">
     <nav>
-        <a class="filtr">Sort by </a>
+        <input class="form-control" [(ngModel)]="search" [ngModelOptions]="{standalone: true}" type="search"
+            placeholder="Search by title" aria-label="Search" (ngModelChange)="this.userQuestionUpdate.next($event)">
+        <a class="filtr">Sort by: </a>
         <select class="sortSelect" (change)="sortChange($event)">
-            <a>Sort by <br></a>
+            <a>Sort by: <br></a>
             <option value="price asc" selected>Price low to hight</option>
             <option value="price des">Price hight to low</option>
             <option value="title asc">Title A-Z</option>
             <option value="title des">Title Z-A</option>
         </select>
-        <a class="filtr">Currency </a>
+        <a class="filtr">Currency: </a>
         <select class="sortSelect" (change)="currencyTypeChange($event)">
             <a>Sort by <br></a>
             <option value="USD" selected>USD</option>
@@ -50,7 +52,7 @@
             <option value="UAH">UAH</option>
         </select>
         <fieldset class="sortSelect">
-            <legend>Categories</legend>
+            <legend>Categories:</legend>
             <input type="checkbox" value="1" checked [checked] (change)="editionTypeChange($event);">
             <label>Books</label><br>
             <input type="checkbox" value="2" checked [checked] (change)="editionTypeChange($event);">

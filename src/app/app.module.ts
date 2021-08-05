@@ -23,16 +23,27 @@ import { EditonState } from './State-manager/State/edition-state';
 import { EditionModule } from './Modules/edition/edition.module';
 import { EditionProfileComponent } from './Components/edition-profile/edition-profile.component';
 import { EventEmitterService } from './Services/event-emitter/event-emitter.service';
+import { NavbarComponent } from './Components/navbar/navbar.component';
+import { CartComponent } from './Components/cart/cart.component';
+import { CartState } from './State-manager/State/cart-state';
 
 
 
 
 @NgModule({
   declarations: [
-    AppComponent,  
+    AppComponent,
+    NavbarComponent,
+    CartComponent,  
   ],
   imports: [
-    NgxsModule.forRoot([AuthState, UserState, StoreState, EditonState], { developmentMode: !environment.production }),
+    NgxsModule.forRoot([
+      AuthState,
+      UserState, 
+      StoreState, 
+      EditonState, 
+      CartState
+    ], { developmentMode: !environment.production }),
     CommonModule,
     BrowserModule,
     AppRoutingModule,
