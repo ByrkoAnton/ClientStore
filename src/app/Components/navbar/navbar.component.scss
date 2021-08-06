@@ -2,7 +2,7 @@
     .headerbook {
       color: rgb(255, 255, 255);
       text-decoration: none;
-      font-size: 22px;
+      font-size: 30px;
     }
     background-color: rgb(4, 136, 4);
   
@@ -12,21 +12,13 @@
       font-size: 16px;
       color: rgb(255, 255, 255);
     }
-    .items{
-      
-      color: #ff0000;
-      font-weight: 600;
-     
-font-size: 14px;
-background-color: #f9fafc;
-//background-size: 20px 20px;
-//background-repeat:no-repeat;
-background-position:2px;
-padding: 4px;
-border-radius: 50%;;
-//border: 1px solid red;
-//padding-left: 25px;
-//position:relative;
-  
-    }
+    
+    .badge-notify{
+      font-size:12px;
+      background:red;
+      position:relative;
+      top: -15px;
+      right: -55px; 
+     }
+    
   }

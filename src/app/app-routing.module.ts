@@ -6,6 +6,7 @@ import { SignInComponent } from './Components/account/sign-in/sign-in.component'
 import { SignOutComponent } from './Components/account/sign-out/sign-out.component';
 import { SignUpSuccessComponent } from './Components/account/sign-up-success/sign-up-success.component';
 import { SignUpComponent } from './Components/account/sign-up/sign-up.component';
+import { CartComponent } from './Components/cart/cart.component';
 import { EditionProfileComponent } from './Components/edition-profile/edition-profile.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { StoreComponent } from './Components/store/store.component';
@@ -22,7 +23,8 @@ const routes: Routes = [
 {path: 'signout', component: SignOutComponent},
 {path: 'getuser', component: UserProfileComponent, canActivate: [AuthGuard]},
 {path: 'editionprofile', component: EditionProfileComponent},
-{path: 'navbar', component: NavbarComponent}
+{path: 'navbar', component: NavbarComponent},
+{path: 'cart', component: CartComponent}
 ];
 
 

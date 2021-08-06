@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { CartModel } from 'src/app/Models/cart/cart-model';
+import { EditionInCartModel, CartModel  } from 'src/app/Models/cart/cart-model';
 import { EditionModel } from 'src/app/Models/edition/edition-models';
 import { CartService } from 'src/app/Services/cart/cart.service';
 import { EventEmitterService } from 'src/app/Services/event-emitter/event-emitter.service';
 import { StoreItemsInCartCount } from 'src/app/State-manager/Action/cart-action';
 import { GetEdition } from 'src/app/State-manager/Action/edition-action';
-import { AuthState } from 'src/app/State-manager/State/auth-state';
 import { EditonState as EditionState } from 'src/app/State-manager/State/edition-state';
 import Swal from 'sweetalert2';
 
@@ -28,13 +27,12 @@ export class EditionProfileComponent implements OnInit {
   edition:EditionModel = {} as EditionModel;
   
   ngOnInit(): void {
-
-    this.store.select(EditionState.getCurrentEditionId).subscribe((x: number) => {
-      this.getEdition(x);
-    }) 
-
-    this.store.select(EditionState.getCurrentEditionPrice)
-
+   var editionId:number = JSON.parse(localStorage.getItem('currentEditonId')!)
+   this.getEdition(editionId);
+    // this.store.select(EditionState.getCurrentEditionId).subscribe((x: number) => {
+    //   this.getEdition(x);
+    // }) !Спросить какой вариант оставить!!
+    
     this.edition$.subscribe((x:EditionModel|null)=> {
       this.edition = x!
     })
@@ -52,23 +50,24 @@ export class EditionProfileComponent implements OnInit {
 
   addToCart()
   {
-    var editionToCart : CartModel = {
+    var editionToCart : EditionInCartModel = {
       edition: this.edition,
       editionQty: this.editionQty
      };
-
     if(localStorage.getItem('userCart') === null)
     {
-     var cart:CartModel[] = [];
+     var cart:EditionInCartModel[] = [];
       cart.push(editionToCart)
       localStorage.setItem('userCart', JSON.stringify(cart));
       this.showSuccesMsg(this.edition.title!, this.editionQty.toString())
       localStorage.setItem('cartItemsCount', JSON.stringify(editionToCart.editionQty));
-      this.storeItemsInCartCount(editionToCart.editionQty);
+      this.storeCountItemsInCart(editionToCart.editionQty);
+     // this.storeCart(cart);
+      this.editionQty =1;
       return
     }
 
-    var cart:CartModel[] = JSON.parse(localStorage.getItem('userCart')!);
+    var cart:EditionInCartModel[] = JSON.parse(localStorage.getItem('userCart')!);
     var productPositionInCart = cart.findIndex(({edition}) =>
     edition?.id === this.edition.id);
 
@@ -78,28 +77,32 @@ export class EditionProfileComponent implements OnInit {
       localStorage.setItem('userCart', JSON.stringify(cart));
       this.showSuccesMsg(this.edition.title!, this.editionQty.toString())
       localStorage.setItem('cartItemsCount', JSON.stringify(this.countEditionsInCart(cart)));
-      this.storeItemsInCartCount(this.countEditionsInCart(cart));
+      this.storeCountItemsInCart(this.countEditionsInCart(cart));
+      //this.storeCart(cart);
+      this.editionQty =1;
       return;
     }
       cart[productPositionInCart].editionQty!+=this.editionQty
       localStorage.setItem('userCart', JSON.stringify(cart));
       this.showSuccesMsg(this.edition.title!, this.editionQty.toString())
       localStorage.setItem('cartItemsCount', JSON.stringify(this.countEditionsInCart(cart)));
-      this.storeItemsInCartCount(this.countEditionsInCart(cart));
+      this.storeCountItemsInCart(this.countEditionsInCart(cart));
+      //this.storeCart(cart);
+      this.editionQty =1;
   }
 
-  countEditionsInCart(cart:CartModel[]): number
+  countEditionsInCart(cart:EditionInCartModel[]): number
   {
     var count: number = 0;
     cart.forEach(element => {
-      count+=element.editionQty!
+      count += element.editionQty!
     });
     return count;
   }
 
-  getUserCart(): CartModel[]
+  getUserCart(): EditionInCartModel[]
   {
-    var userCart :CartModel[] = JSON.parse(localStorage.getItem('userCart')!); 
+    var userCart :EditionInCartModel[] = JSON.parse(localStorage.getItem('userCart')!); 
     return userCart
   }
 
@@ -113,7 +116,7 @@ export class EditionProfileComponent implements OnInit {
     });
   }
 
-  storeItemsInCartCount(itemsCount: number | null) {
+  storeCountItemsInCart(itemsCount: number | null) {
       this.store.dispatch(new StoreItemsInCartCount({
         itemsInCartCount:itemsCount
       }))

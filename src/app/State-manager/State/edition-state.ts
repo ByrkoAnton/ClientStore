@@ -5,7 +5,7 @@ import { tap } from "rxjs/operators";
 import { CurrentEditonIdModel, EditionModel } from "src/app/Models/edition/edition-models";
 
 import { EditionService } from "src/app/Services/edition/edition.service";
-import { GetEdition, StoreCurrentEditonId } from "../Action/edition-action";
+import { GetEdition, StoreCurrentEdition, StoreCurrentEditonId } from "../Action/edition-action";
 
 
 @State<EditionModel>({
@@ -35,7 +35,8 @@ export class EditonState {
     storeCurrentEditonId(context: StateContext<CurrentEditonIdModel>, action: StoreCurrentEditonId) {
         context.patchState({
           Id: action.payload.Id
-        });    
+        }); 
+        localStorage.setItem("currentEditonId", JSON.stringify(action.payload.Id))   
   }
 
     @Action(GetEdition)
@@ -43,8 +44,13 @@ export class EditonState {
     return this.editionService.getEditions(action.payload).pipe(
       tap((result) => {
         context.patchState(result);
+        localStorage.setItem("currentEdition", JSON.stringify(result))
       })
     )
   }
 
+  @Action(StoreCurrentEdition)
+  storeCurrentEdition(context: StateContext<EditionModel>, action: StoreCurrentEdition) {
+      context.patchState(action.payload);      
+  }
 }

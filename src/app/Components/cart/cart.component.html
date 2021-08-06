@@ -1,1 +1,15 @@
-<p>cart works!</p>
+
+<div class="cart" *ngFor="let editionInCart of cart$ | async">
+   <ng-container *ngIf="editionInCart.edition !== null">
+    <div class = title>
+        <a>{{editionInCart.edition.title}}</a>
+   </div>
+   <div class = price>
+    <a>{{editionInCart.edition.price}}</a>
+</div>
+<div class = qty>
+    <a>{{editionInCart.editionQty}}</a>
+</div>
+
+    </ng-container>
+</div>

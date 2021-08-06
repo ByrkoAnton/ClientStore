@@ -17,22 +17,24 @@ export class NavbarComponent implements OnInit {
     this.isAuthenticated = res;
   });
 
-  cartItemsCount$ = this.store.select(CartState.getItemsInCartCount);
+  cartItemsCount$:any = this.store.select(CartState.getItemsInCartCount);
   isCartEmpty!:boolean;
+  isCartFull!:boolean;
   cart = this.store.select(CartState.getItemsInCartCount).subscribe(res =>{
-    this.isCartEmpty = res === 0
+    this.isCartEmpty = res === 0;
+    this.isCartFull = res! > 99
   });
 
   constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
-    this.restoreItemsCount();
+    this.restoreCountItemsInCart();
   }
   signOut(): void {
     this.store.dispatch(new SignOut())
   }
 
-  restoreItemsCount():void{ 
+  restoreCountItemsInCart():void{ 
     var count:number = + localStorage.getItem('cartItemsCount')!;
       this.store.dispatch(new StoreItemsInCartCount({
         itemsInCartCount:count
