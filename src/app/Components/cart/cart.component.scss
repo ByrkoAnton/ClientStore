@@ -1,44 +1,132 @@
+hr{
+  //width: 50%;
+  //size: 40px;
+  margin-bottom: -1.5%; 
+  //border-color: green;
+  border-width: 3px;
+}
+.tableHad {
+  display: flex;
+  width: 100%;
+  margin-bottom: -4%;
+  // margin-left: 5%;
+  // margin-right: 5%;
+}
 .cart {
     display: flex;
-    width: 90%;
+    width: 100%;
     margin-top: 2%;
-    margin-left: 5%;
-    margin-right: 5%;
-    
-
+    // margin-left: 5%;
+    // margin-right: 5%;   
 }
+
+.modal-title
+{
+  margin-left: 2%;
+  padding-top: 2%;
+  color:rgb(12, 160, 12);
+  font-weight: 1000;
+}
+
+.had-title{
+  //background: #b0e0bf;
+  width:40%; 
+  text-align: center;
+}
+.had-price{
+ // background: #e7f5db;
+  width: 16%; 
+  text-align: center;
+  
+}
+.had-qty{
+  //background: #84a3f8;
+  width: 20%; 
+  text-align: center;
+}
+
+.had-amount{  
+  //background: #ee6570;
+  width: 23%; 
+  margin-left: -1%;
+  text-align: center;
+}
+
 .title{
-  background: #b0e0bf;
-  width: 30%; 
+  //background: #b0e0bf;
+  width:40%;  
 }
+
 .price{
-  background: #e7f5db;
-  width: 10%; 
+  //background: #e7f5db;
+  width: 16%; 
+  text-align: center;
+  
 }
+
 .qty{
-  background: #84a3f8;
-  width: 15%; 
+  //background: #84a3f8;
+  width: 10%; 
+  text-align: center;
+  .qty-input{
+    width: 100%; 
+    border-radius: 20%;
+    text-align: center; 
+    caret-color: transparent;   
+  }
   
-  
-
-  button{
-    background-image: linear-gradient(160deg, #8ceabb 0%, #378f7b 100%);
-    color: rgb(247, 242, 242);
-    border-radius: 15%;
-    text-align: center;
-    width: 90%;
-    margin-top: 10%;
-
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
   }
-  button:hover {
-    color: rgb(14, 13, 13);
-  }
+}
 
-  input {
-    color: transparent;
-    text-shadow: 0 0 0 #00060a;
-    &:focus {
-        outline: none;
-    }
-  }
+.total{
+   margin-top: 2%;
+   margin-left: 60%;
+   font-weight: 700;
+   .price{
+     color: green;
+   }
+}
+.amount{  
+  //background: #ee6570;
+  width: 23%; 
+  margin-left: 1%;
+  text-align: center;
+}
+
+.del-btn{
+  float: right;
+}
+
+.change-qty-btn{
+  width: 5%;
+  text-align: center;
+}
+
+.pay-btn
+{
+  width: 30%;
+ size: 20%;
+  border-radius: 7%;
+}
+
+.empty-msg{
+  text-align: center; 
+  color: rgb(12, 146, 12);
+  margin-top: 3%;
+}
+
+#pay{
+  background-image: linear-gradient(160deg, #8ceabb 0%, #378f7b 100%);
+  color: rgb(10, 10, 10);
+  //border-radius: 15%;
+  //text-align: center;
+  width: 40%;
+  margin-right: 20%;
+}
+#pay:hover {
+  color: rgb(253, 253, 253);
+  background-image: linear-gradient(160deg, #383737 0%, #2b2e2e 100%);
 }

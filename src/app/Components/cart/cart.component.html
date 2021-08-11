@@ -1,5 +1,4 @@
-
-<div class="cart" *ngFor="let editionInCart of cart$ | async">
+<!-- <div class="cart" *ngFor="let editionInCart of cart$ | async">
    <ng-container *ngIf="editionInCart.edition !== null">
     <div class = title>
         <a>{{editionInCart.edition.title}}</a>
@@ -12,4 +11,65 @@
 </div>
 
     </ng-container>
+</div> -->
+<div class="modal-header">
+  <img src="https://mpng.subpng.com/20180327/pyq/kisspng-computer-icons-stock-photography-royalty-free-clip-add-to-cart-button-5ab9c9da53d0b8.5222550915221252743433.jpg" width="80" height="80">
+  <h1 class="modal-title" id="modal-primary-title">Cart</h1>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+
+<div class="modal-body">
+  <div class="tableHad">
+    <div class= had-title>
+      <h6>Product</h6>
+    </div>
+    <div class=had-price>
+      <h6>Unit price</h6>
+    </div>
+    <div class= had-qty>
+      <h6>Qty</h6>
+    </div>
+    <div class=had-amount>
+      <h6>Amount</h6>
+    </div>
+  </div>
+  <hr>
+  <ng-container *ngIf="isCartEmpty">
+    <h1 class="empty-msg">Cart is empty</h1>
+  </ng-container>
+  <div class="cart" *ngFor="let editionInCart of cart$ | async">
+    <ng-container *ngIf="editionInCart.edition !== null">
+      <div class=title>
+        <a>{{editionInCart.edition.title}}</a>
+      </div>
+      <div class=price>
+        <a>{{editionInCart.edition.price}}</a>
+      </div>
+      <input class = change-qty-btn type="image" title="-1" (click)="subtract(editionInCart.editionQty, editionInCart.edition.id)" img src="https://img.icons8.com/material-outlined/24/000000/minus.png" width="30" height="30">
+      <div class=qty>
+        <input class = qty-input   type="number" min="1" step="1" onkeydown="return false" value={{editionInCart.editionQty}}> 
+      </div>
+      <input class = change-qty-btn type="image" title="+1" (click)="add(editionInCart.editionQty, editionInCart.edition.id)" img src="https://img.icons8.com/ios-filled/30/000000/plus-math.png" width="30" height="30">  
+      <div class=amount>
+        <a>{{editionInCart.editionQty! * editionInCart.edition.price!}}</a>
+        <input class="del-btn" type="image" title="Delete" (click)="delete(editionInCart.edition.id)" img src="https://icons-for-free.com/iconfiles/png/512/delete+remove+trash+trash+bin+trash+can+icon-1320073117929397588.png"  width="20" height="25">
+      </div>
+    </ng-container>
+  </div> 
+  <hr>
+  <div class="total">
+  <span>
+    <a>Total price: </a>
+  </span>
+  <span class = "price" >
+    <a>{{totalPrice}}</a>
+  </span>
+</div>
+</div>
+<div class="modal-footer">
+  <button id ="pay" class ="btn btn-outline-dark">Pay</button>
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
 </div>

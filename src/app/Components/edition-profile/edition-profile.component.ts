@@ -62,7 +62,7 @@ export class EditionProfileComponent implements OnInit {
       this.showSuccesMsg(this.edition.title!, this.editionQty.toString())
       localStorage.setItem('cartItemsCount', JSON.stringify(editionToCart.editionQty));
       this.storeCountItemsInCart(editionToCart.editionQty);
-     // this.storeCart(cart);
+     //this.storeCart(cart);
       this.editionQty =1;
       return
     }

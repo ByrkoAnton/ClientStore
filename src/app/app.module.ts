@@ -57,7 +57,8 @@ import { CartState } from './State-manager/State/cart-state';
     StoreModule,
     EditionModule,
     RouterModule,
-    NgbModule
+    NgbModule,
+  
   ],
   providers: [
     AuthGuard,
