@@ -5,7 +5,7 @@ import { tap } from 'rxjs/operators';
 import { CurrentEditonIdModel, EditionModel } from 'src/app/Models/edition/edition-models';
 import { SliderModel } from 'src/app/Models/slider/slider-model';
 import { StoreModel } from 'src/app/Models/store/store-model';
-import { StoreService } from 'src/app/Services/store/store.service';
+import { StoreService } from 'src/app/services/store/store.service';
 import { GetFiltratedEditions} from '../Action/store-action';
 
 

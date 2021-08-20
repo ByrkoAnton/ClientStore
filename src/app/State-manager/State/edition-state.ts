@@ -4,7 +4,7 @@ import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { tap } from "rxjs/operators";
 import { CurrentEditonIdModel, EditionModel } from "src/app/Models/edition/edition-models";
 
-import { EditionService } from "src/app/Services/edition/edition.service";
+import { EditionService } from "src/app/services/edition/edition.service";
 import { GetEdition, StoreCurrentEdition, StoreCurrentEditonId } from "../Action/edition-action";
 
 

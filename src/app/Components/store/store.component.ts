@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { EventEmitterService } from 'src/app/Services/event-emitter/event-emitter.service';
+import { EventEmitterService } from 'src/app/services/event-emitter/event-emitter.service';
 import { SignOut } from 'src/app/State-manager/Action/auth-action';
 import { StoreCurrentEditonId } from 'src/app/State-manager/Action/edition-action';
 import { GetFiltratedEditions } from 'src/app/State-manager/Action/store-action';

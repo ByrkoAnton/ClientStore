@@ -10,24 +10,23 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { AuthState } from './State-manager/State/auth-state';
 import { AuthGuard } from './Guards/auth.guard';
-import { AccountModule } from './Modules/account/account.module';
+import { AccountModule } from './modules/account/account.module';
 import { AuthInterceptorInterceptor } from './Interceptors/auth-interceptor.interceptor';
 import { UserState } from './State-manager/State/user-state';
 import { CommonModule } from '@angular/common';
-import { UserModule } from './Modules/user/user.module';
+import { UserModule } from './modules/user/user.module';
 import { RouterModule } from '@angular/router';
-import { StoreModule } from './Modules/store/store.module';
+import { StoreModule } from './modules/store/store.module';
 import { StoreState } from './State-manager/State/store-state';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditonState } from './State-manager/State/edition-state';
-import { EditionModule } from './Modules/edition/edition.module';
-import { EditionProfileComponent } from './Components/edition-profile/edition-profile.component';
-import { EventEmitterService } from './Services/event-emitter/event-emitter.service';
-import { NavbarComponent } from './Components/navbar/navbar.component';
-import { CartComponent } from './Components/cart/cart.component';
+import { EditionModule } from './modules/edition/edition.module';
+import { EventEmitterService } from './services/event-emitter/event-emitter.service';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { CartComponent } from './components/cart/cart.component';
 import { CartState } from './State-manager/State/cart-state';
-
-
+import { NgxStripeModule } from 'ngx-stripe';
+import { OrderPaymentModule } from './modules/order-payment/order-payment.module';
 
 
 @NgModule({
@@ -56,6 +55,7 @@ import { CartState } from './State-manager/State/cart-state';
     UserModule,
     StoreModule,
     EditionModule,
+    OrderPaymentModule,
     RouterModule,
     NgbModule,
   

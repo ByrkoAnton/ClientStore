@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserProfileComponent } from 'src/app/Components/user/user-profile/user-profile.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { UserProfileComponent } from 'src/app/components/user/user-profile/user-profile.component';
 
 
 

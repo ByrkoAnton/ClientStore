@@ -3,8 +3,8 @@ import { Router } from "@angular/router";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { tap } from "rxjs/operators";
 import { UserModel } from "src/app/Models/user/user-model";
-import { AuthenticationService } from "src/app/Services/Authentication/authentication.service";
-import { UserService } from "src/app/Services/User/user.service";
+import { AuthenticationService } from "src/app/services/authentication/authentication.service";
+import { UserService } from "src/app/services/User/user.service";
 import { ChangePassword, GetUser, UpdateUser } from "../Action/user-acton";
 
 

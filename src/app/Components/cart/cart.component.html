@@ -1,17 +1,3 @@
-<!-- <div class="cart" *ngFor="let editionInCart of cart$ | async">
-   <ng-container *ngIf="editionInCart.edition !== null">
-    <div class = title>
-        <a>{{editionInCart.edition.title}}</a>
-   </div>
-   <div class = price>
-    <a>{{editionInCart.edition.price}}</a>
-</div>
-<div class = qty>
-    <a>{{editionInCart.editionQty}}</a>
-</div>
-
-    </ng-container>
-</div> -->
 <div class="modal-header">
   <img src="https://mpng.subpng.com/20180327/pyq/kisspng-computer-icons-stock-photography-royalty-free-clip-add-to-cart-button-5ab9c9da53d0b8.5222550915221252743433.jpg" width="80" height="80">
   <h1 class="modal-title" id="modal-primary-title">Cart</h1>
@@ -70,6 +56,6 @@
 </div>
 </div>
 <div class="modal-footer">
-  <button id ="pay" class ="btn btn-outline-dark">Pay</button>
+  <button id ="pay" class ="btn btn-outline-dark" (click) = "pay()">Pay</button>
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
 </div>

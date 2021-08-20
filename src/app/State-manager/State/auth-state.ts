@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { State, Selector, StateContext, Action } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
-import { AuthenticationService } from 'src/app/Services/Authentication/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { TokenModel } from '../../Models/Account/token-model';
 import { ForgotPassword, RestoreTokens as RestoreTokens, SignIn, SignOut, SignUp } from '../Action/auth-action';
 

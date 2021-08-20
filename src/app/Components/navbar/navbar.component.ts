@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngxs/store';
-import { EventEmitterService } from 'src/app/Services/event-emitter/event-emitter.service';
+import { EventEmitterService } from 'src/app/services/event-emitter/event-emitter.service';
 import { SignOut } from 'src/app/State-manager/Action/auth-action';
 import { StoreItemsInCartCount } from 'src/app/State-manager/Action/cart-action';
 import { AuthState } from 'src/app/State-manager/State/auth-state';
 import { CartState } from 'src/app/State-manager/State/cart-state';
 import { CartComponent } from '../cart/cart.component';
+
 
 @Component({
   selector: 'app-navbar',

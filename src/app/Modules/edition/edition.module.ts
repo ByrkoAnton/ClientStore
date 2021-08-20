@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EditionProfileComponent } from 'src/app/Components/edition-profile/edition-profile.component';
+import { EditionProfileComponent } from 'src/app/components/edition-profile/edition-profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';

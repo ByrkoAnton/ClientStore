@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalDismissReasons, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngxs/store';
 import { EditionInCartModel } from 'src/app/Models/cart/cart-model';
 import { StoreCart, StoreItemsInCartCount } from 'src/app/State-manager/Action/cart-action';
 import { CartState } from 'src/app/State-manager/State/cart-state';
+import Swal from 'sweetalert2';
+import { PaymentComponent } from '../payment/payment.component';
 
 @Component({
   selector: 'app-cart',
@@ -27,7 +29,7 @@ export class CartComponent implements OnInit {
 
   cart$ = this.store.select(CartState.getCart);
 
-  constructor(private store: Store, public activeModal: NgbActiveModal) { }
+  constructor(private store: Store, public activeModal: NgbActiveModal, public modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.cart = JSON.parse(localStorage.getItem('userCart')!)
@@ -66,15 +68,27 @@ export class CartComponent implements OnInit {
     var updatedCountItemsInCart = countItemsInCart - cart[positionInCart].editionQty! + editionQty!;
 
     if (editionQty === 0) {
-      cart.splice(positionInCart, 1);
-      localStorage.setItem('userCart', JSON.stringify(cart));
-      localStorage.setItem("cartItemsCount",JSON.stringify(updatedCountItemsInCart))
-      this.store.dispatch(new StoreCart({
-        editionsAndQty: cart
-      }))
-      this.store.dispatch(new StoreItemsInCartCount({
-        itemsInCartCount:updatedCountItemsInCart
-      }))
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You will remove all " + cart[positionInCart].edition?.title + " from cart",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#378f7b',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, remove it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          cart.splice(positionInCart, 1);
+          localStorage.setItem('userCart', JSON.stringify(cart));
+          localStorage.setItem("cartItemsCount",JSON.stringify(updatedCountItemsInCart))
+          this.store.dispatch(new StoreCart({
+            editionsAndQty: cart
+          }))
+          this.store.dispatch(new StoreItemsInCartCount({
+            itemsInCartCount:updatedCountItemsInCart
+          }))   
+        }
+      })
       return
     }
 
@@ -89,5 +103,8 @@ export class CartComponent implements OnInit {
       }))
   }
 
+  pay() {
+    this.modalService.open(PaymentComponent);
+  }
 }
 
