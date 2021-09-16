@@ -4,7 +4,7 @@ import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { tap } from "rxjs/operators";
 import { UserModel } from "src/app/Models/user/user-model";
 import { AuthenticationService } from "src/app/services/authentication/authentication.service";
-import { UserService } from "src/app/services/User/user.service";
+import { UserService } from "src/app/services/user/user.service";
 import { ChangePassword, GetUser, UpdateUser } from "../Action/user-acton";
 
 

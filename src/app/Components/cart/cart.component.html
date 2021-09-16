@@ -56,6 +56,8 @@
 </div>
 </div>
 <div class="modal-footer">
-  <button id ="pay" class ="btn btn-outline-dark" (click) = "pay()">Pay</button>
+  <ng-container *ngIf="!isCartEmpty">
+  <button id ="pay" class ="btn btn-outline-dark" (click) = "pay()">Complete purchase</button>
+</ng-container>
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
 </div>

@@ -30,3 +30,8 @@ export interface EditionModel {
   export interface CurrentEditonIdModel {
     Id: number;
   }
+
+  export interface EditionForPayModel {
+    editionId: number | null| undefined;
+    count: number | null| undefined; 
+  }

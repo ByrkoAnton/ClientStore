@@ -25,8 +25,8 @@ import { EventEmitterService } from './services/event-emitter/event-emitter.serv
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CartState } from './State-manager/State/cart-state';
-import { NgxStripeModule } from 'ngx-stripe';
 import { OrderPaymentModule } from './modules/order-payment/order-payment.module';
+import { PaymentState } from './State-manager/State/payment-state';
 
 
 @NgModule({
@@ -40,7 +40,8 @@ import { OrderPaymentModule } from './modules/order-payment/order-payment.module
       AuthState,
       UserState, 
       StoreState, 
-      EditonState, 
+      EditonState,
+      PaymentState, 
       CartState
     ], { developmentMode: !environment.production }),
     CommonModule,
