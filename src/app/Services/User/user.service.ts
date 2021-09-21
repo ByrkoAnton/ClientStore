@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TokenModel } from 'src/app/Models/Account/token-model';
 import { UserModel } from 'src/app/Models/user/user-model';
 
 @Injectable({

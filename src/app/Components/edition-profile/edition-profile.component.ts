@@ -4,9 +4,9 @@ import { EditionInCartModel, CartModel  } from 'src/app/Models/cart/cart-model';
 import { EditionModel } from 'src/app/Models/edition/edition-models';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { EventEmitterService } from 'src/app/services/event-emitter/event-emitter.service';
-import { StoreItemsInCartCount } from 'src/app/State-manager/Action/cart-action';
-import { GetEdition } from 'src/app/State-manager/Action/edition-action';
-import { EditonState as EditionState } from 'src/app/State-manager/State/edition-state';
+import { StoreItemsInCartCount } from 'src/app/State-manager/action/cart-action';
+import { GetEdition } from 'src/app/State-manager/action/edition-action';
+import { EditonState as EditionState } from 'src/app/State-manager/state/edition-state';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -29,10 +29,7 @@ export class EditionProfileComponent implements OnInit {
   ngOnInit(): void {
    var editionId:number = JSON.parse(localStorage.getItem('currentEditonId')!)
    this.getEdition(editionId);
-    // this.store.select(EditionState.getCurrentEditionId).subscribe((x: number) => {
-    //   this.getEdition(x);
-    // }) !Спросить какой вариант оставить!!
-    
+   
     this.edition$.subscribe((x:EditionModel|null)=> {
       this.edition = x!
     })
@@ -62,7 +59,6 @@ export class EditionProfileComponent implements OnInit {
       this.showSuccesMsg(this.edition.title!, this.editionQty.toString())
       localStorage.setItem('cartItemsCount', JSON.stringify(editionToCart.editionQty));
       this.storeCountItemsInCart(editionToCart.editionQty);
-     //this.storeCart(cart);
       this.editionQty =1;
       return
     }
@@ -78,7 +74,6 @@ export class EditionProfileComponent implements OnInit {
       this.showSuccesMsg(this.edition.title!, this.editionQty.toString())
       localStorage.setItem('cartItemsCount', JSON.stringify(this.countEditionsInCart(cart)));
       this.storeCountItemsInCart(this.countEditionsInCart(cart));
-      //this.storeCart(cart);
       this.editionQty =1;
       return;
     }
@@ -87,7 +82,6 @@ export class EditionProfileComponent implements OnInit {
       this.showSuccesMsg(this.edition.title!, this.editionQty.toString())
       localStorage.setItem('cartItemsCount', JSON.stringify(this.countEditionsInCart(cart)));
       this.storeCountItemsInCart(this.countEditionsInCart(cart));
-      //this.storeCart(cart);
       this.editionQty =1;
   }
 

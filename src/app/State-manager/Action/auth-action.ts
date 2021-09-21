@@ -1,7 +1,7 @@
-import { ForgotPasswordModel } from 'src/app/Models/Account/forgot-password-model';
-import { SignUpModel } from 'src/app/Models/Account/sign-up-model';
-import { TokenModel } from 'src/app/Models/Account/token-model';
-import {SignInModel} from '../../Models/Account/sign-in-model'
+import { ForgotPasswordModel } from 'src/app/Models/account/forgot-password-model';
+import { SignUpModel } from 'src/app/Models/account/sign-up-model';
+import { TokenModel } from 'src/app/Models/account/token-model';
+import {SignInModel} from '../../Models/account/sign-in-model'
 
 export class SignIn {
   static readonly type = '[Auth] SignIn';

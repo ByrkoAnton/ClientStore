@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { CartModel, EditionInCartModel, ItemsInCartCount } from "src/app/Models/cart/cart-model";
-import { StoreCart, StoreItemsInCartCount } from "../Action/cart-action";
+import { ClearCart, StoreCart, StoreItemsInCartCount } from "../action/cart-action";
 
 
 @State<EditionInCartModel>({
@@ -33,5 +33,15 @@ export class CartState {
         context.patchState({
             editionsAndQty:action.payload.editionsAndQty
         });
+    }
+
+    @Action(ClearCart)
+    ClearCart(cartContext: StateContext<CartModel>, itemsCountContext: StateContext<ItemsInCartCount>, action: ClearCart) {
+        cartContext.setState({
+            editionsAndQty:null
+          })
+          itemsCountContext.setState({
+              itemsInCartCount:null
+          })
     }
 }

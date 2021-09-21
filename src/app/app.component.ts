@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { RestoreTokens as RestoreTokens } from './State-manager/Action/auth-action';
+import { RestoreTokens as RestoreTokens } from './State-manager/action/auth-action';
 
 @Component({
   selector: 'app-root',

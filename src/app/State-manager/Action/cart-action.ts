@@ -8,3 +8,8 @@ export class StoreCart {
     static readonly type = '[Cart] Cart';
     constructor(public payload: CartModel) {}
   }
+
+  export class ClearCart {
+    static readonly type = '[ClearCart] ClearCart';
+    constructor() {}
+  }

@@ -8,25 +8,25 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
-import { AuthState } from './State-manager/State/auth-state';
+import { AuthState } from './State-manager/state/auth-state';
 import { AuthGuard } from './Guards/auth.guard';
 import { AccountModule } from './modules/account/account.module';
-import { AuthInterceptorInterceptor } from './Interceptors/auth-interceptor.interceptor';
-import { UserState } from './State-manager/State/user-state';
+import { AuthInterceptorInterceptor } from './interceptors/auth-interceptor.interceptor';
+import { UserState } from './State-manager/state/user-state';
 import { CommonModule } from '@angular/common';
 import { UserModule } from './modules/user/user.module';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from './modules/store/store.module';
-import { StoreState } from './State-manager/State/store-state';
+import { StoreState } from './State-manager/state/store-state';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { EditonState } from './State-manager/State/edition-state';
+import { EditonState } from './State-manager/state/edition-state';
 import { EditionModule } from './modules/edition/edition.module';
 import { EventEmitterService } from './services/event-emitter/event-emitter.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { CartComponent } from './components/cart/cart.component';
-import { CartState } from './State-manager/State/cart-state';
+import { CartState } from './State-manager/state/cart-state';
 import { OrderPaymentModule } from './modules/order-payment/order-payment.module';
-import { PaymentState } from './State-manager/State/payment-state';
+import { PaymentState } from './State-manager/state/payment-state';
 
 
 @NgModule({

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import {SignInModel} from '../../../Models/Account/sign-in-model';
+import {SignInModel} from '../../../Models/account/sign-in-model';
 
-import { SignIn } from '../../../State-manager/Action/auth-action';
+import { SignIn } from '../../../State-manager/action/auth-action';
 
 
 @Component({

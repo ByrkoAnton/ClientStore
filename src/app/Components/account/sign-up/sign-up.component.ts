@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { SignUp } from 'src/app/State-manager/Action/auth-action';
+import { SignUp } from 'src/app/State-manager/action/auth-action';
 
 
 @Component({

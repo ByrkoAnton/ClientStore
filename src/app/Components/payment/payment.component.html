@@ -2,7 +2,7 @@
     <span aria-hidden="true">&times;</span>
   </button>
 <h2>Book Store</h2>
-<form novalidate (ngSubmit)="createToken()" [formGroup]="stripeForm">
+<form novalidate (ngSubmit)="pay()" [formGroup]="stripeForm">
     <ngx-stripe-card
       [options]="cardOptions"
       [elementsOptions]="elementsOptions"

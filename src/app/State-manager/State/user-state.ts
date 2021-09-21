@@ -5,7 +5,7 @@ import { tap } from "rxjs/operators";
 import { UserModel } from "src/app/Models/user/user-model";
 import { AuthenticationService } from "src/app/services/authentication/authentication.service";
 import { UserService } from "src/app/services/user/user.service";
-import { ChangePassword, GetUser, UpdateUser } from "../Action/user-acton";
+import { ChangePassword, GetUser, UpdateUser } from "../action/user-acton";
 
 
   @State<UserModel>({
@@ -32,6 +32,7 @@ export class UserState {
       })
     )
   }
+
   @Action(UpdateUser)
   updateUser(context: StateContext<UserModel>, action: UpdateUser) {
     return this.userService.updateUser(action.payload).pipe(

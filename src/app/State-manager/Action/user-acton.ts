@@ -3,7 +3,7 @@ import {UserModel } from "src/app/Models/user/user-model";
 
 export class GetUser {
     static readonly type = '[User] UserData';
-    constructor() {console.log("Actionrrrr")}
+    constructor() {}
   }
 
   export class UpdateUser {

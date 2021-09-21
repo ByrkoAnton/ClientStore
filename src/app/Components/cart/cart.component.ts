@@ -2,8 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngxs/store';
 import { EditionInCartModel } from 'src/app/Models/cart/cart-model';
-import { StoreCart, StoreItemsInCartCount } from 'src/app/State-manager/Action/cart-action';
-import { CartState } from 'src/app/State-manager/State/cart-state';
+import { EventEmitterService } from 'src/app/services/event-emitter/event-emitter.service';
+import { ClearCart, StoreCart, StoreItemsInCartCount } from 'src/app/State-manager/action/cart-action';
+import { AuthState } from 'src/app/State-manager/state/auth-state';
+import { CartState } from 'src/app/State-manager/state/cart-state';
 import Swal from 'sweetalert2';
 import { PaymentComponent } from '../payment/payment.component';
 
@@ -18,6 +20,11 @@ export class CartComponent implements OnInit {
 
   cart: EditionInCartModel[] = {} as EditionInCartModel[];
 
+  isAuthenticated!: boolean;
+  auth = this.store.select(AuthState.isAuthenticated).subscribe(res => {
+    this.isAuthenticated = res;
+  });
+
   totalPrice!:number;
 
   isCartEmpty!: boolean;
@@ -29,7 +36,8 @@ export class CartComponent implements OnInit {
 
   cart$ = this.store.select(CartState.getCart);
 
-  constructor(private store: Store, public activeModal: NgbActiveModal, public modalService: NgbModal) { }
+  constructor(private store: Store, public activeModal: NgbActiveModal,
+     public modalService: NgbModal, private eventEmitterService: EventEmitterService) { }
 
   ngOnInit(): void {
     this.cart = JSON.parse(localStorage.getItem('userCart')!)
@@ -44,6 +52,12 @@ export class CartComponent implements OnInit {
        this.totalPrice = 
        res?.reduce((accumulator, current) => accumulator + current.edition?.price! * current.editionQty!, 0)!;
       })
+
+    this.eventEmitterService.subsVar = this.eventEmitterService.    
+    invokeClearCart.subscribe(() => {    
+    this.clearCart();   
+    });
+         
   }
 
   add(editionQty: number|null, editionId: number | null)
@@ -80,7 +94,7 @@ export class CartComponent implements OnInit {
         if (result.isConfirmed) {
           cart.splice(positionInCart, 1);
           localStorage.setItem('userCart', JSON.stringify(cart));
-          localStorage.setItem("cartItemsCount",JSON.stringify(updatedCountItemsInCart))
+          localStorage.setItem('cartItemsCount',JSON.stringify(updatedCountItemsInCart))
           this.store.dispatch(new StoreCart({
             editionsAndQty: cart
           }))
@@ -101,6 +115,14 @@ export class CartComponent implements OnInit {
       this.store.dispatch(new StoreItemsInCartCount({
         itemsInCartCount:updatedCountItemsInCart
       }))
+  }
+
+  clearCart()
+  {
+    localStorage.removeItem('userCart');
+    localStorage.removeItem("cartItemsCount")
+    this.store.dispatch(new ClearCart)
+    location.reload();
   }
 
   pay() {

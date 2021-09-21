@@ -57,7 +57,13 @@
 </div>
 <div class="modal-footer">
   <ng-container *ngIf="!isCartEmpty">
+    <button type="button"  class ="btn btn-outline-dark" (click) = "clearCart()">Clear cart</button>
+  </ng-container>
+  <ng-container *ngIf="!isCartEmpty && isAuthenticated">
   <button id ="pay" class ="btn btn-outline-dark" (click) = "pay()">Complete purchase</button>
+</ng-container>
+<ng-container *ngIf="!isCartEmpty && !isAuthenticated">
+  <button id ="pay" class ="btn btn-outline-dark" routerLink="/signin" (click)="activeModal.close('Close click')">Sign in for purchase</button>
 </ng-container>
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
 </div>

@@ -8,8 +8,8 @@ import {
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
-import { TokenModel } from '../Models/Account/token-model';
-import { AuthState } from '../State-manager/State/auth-state';
+import { TokenModel } from '../Models/account/token-model';
+import { AuthState } from '../State-manager/state/auth-state';
 
 @Injectable()
 export class AuthInterceptorInterceptor implements HttpInterceptor {

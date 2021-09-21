@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { ChangePassword, GetUser, UpdateUser } from 'src/app/State-manager/Action/user-acton';
-import { UserState } from 'src/app/State-manager/State/user-state';
+import { ChangePassword, GetUser, UpdateUser } from 'src/app/State-manager/action/user-acton';
+import { UserState } from 'src/app/State-manager/state/user-state';
 
 @Component({
   selector: 'app-user-profile',

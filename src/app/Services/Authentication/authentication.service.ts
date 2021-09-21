@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ForgotPasswordModel } from 'src/app/Models/Account/forgot-password-model';
-import { SignInModel } from 'src/app/Models/Account/sign-in-model';
-import { SignUpModel } from 'src/app/Models/Account/sign-up-model';
-import { TokenModel } from 'src/app/Models/Account/token-model';
+import { ForgotPasswordModel } from 'src/app/Models/account/forgot-password-model';
+import { SignInModel } from 'src/app/Models/account/sign-in-model';
+import { SignUpModel } from 'src/app/Models/account/sign-up-model';
+import { TokenModel } from 'src/app/Models/account/token-model';
 
 @Injectable({
   providedIn: 'root'

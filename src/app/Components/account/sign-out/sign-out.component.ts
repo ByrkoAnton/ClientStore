@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { TokenModel } from 'src/app/Models/Account/token-model';
-import { SignOut } from 'src/app/State-manager/Action/auth-action';
+import { TokenModel } from 'src/app/Models/account/token-model';
+import { SignOut } from 'src/app/State-manager/action/auth-action';
 
 @Component({
   selector: 'app-sign-out',

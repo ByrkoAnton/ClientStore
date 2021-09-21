@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { ForgotPasswordModel } from 'src/app/Models/Account/forgot-password-model';
-import { ForgotPassword } from 'src/app/State-manager/Action/auth-action';
+import { ForgotPasswordModel } from 'src/app/Models/account/forgot-password-model';
+import { ForgotPassword } from 'src/app/State-manager/action/auth-action';
 
 
 @Component({

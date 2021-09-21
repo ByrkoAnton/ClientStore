@@ -31,7 +31,7 @@ export interface EditionModel {
     Id: number;
   }
 
-  export interface EditionForPayModel {
+  export class EditionForPayModel {
     editionId: number | null| undefined;
     count: number | null| undefined; 
   }

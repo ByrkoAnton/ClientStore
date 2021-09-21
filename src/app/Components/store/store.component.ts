@@ -5,11 +5,11 @@ import { Store } from '@ngxs/store';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { EventEmitterService } from 'src/app/services/event-emitter/event-emitter.service';
-import { SignOut } from 'src/app/State-manager/Action/auth-action';
-import { StoreCurrentEditonId } from 'src/app/State-manager/Action/edition-action';
-import { GetFiltratedEditions } from 'src/app/State-manager/Action/store-action';
-import { AuthState } from 'src/app/State-manager/State/auth-state';
-import { StoreState } from 'src/app/State-manager/State/store-state';
+import { SignOut } from 'src/app/State-manager/action/auth-action';
+import { StoreCurrentEditonId } from 'src/app/State-manager/action/edition-action';
+import { GetFiltratedEditions } from 'src/app/State-manager/action/store-action';
+import { AuthState } from 'src/app/State-manager/state/auth-state';
+import { StoreState } from 'src/app/State-manager/state/store-state';
 
 
 @Component({

@@ -6,7 +6,7 @@ import { CurrentEditonIdModel, EditionModel } from 'src/app/Models/edition/editi
 import { SliderModel } from 'src/app/Models/slider/slider-model';
 import { StoreModel } from 'src/app/Models/store/store-model';
 import { StoreService } from 'src/app/services/store/store.service';
-import { GetFiltratedEditions} from '../Action/store-action';
+import { GetFiltratedEditions} from '../action/store-action';
 
 
 @State<StoreModel>({
