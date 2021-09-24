@@ -5,7 +5,11 @@ import { ClearCart, StoreCart, StoreItemsInCartCount } from "../action/cart-acti
 
 
 @State<EditionInCartModel>({
-    name: 'Cart'
+    name: 'Cart',
+    defaults: {
+      edition: null,
+      editionQty:0
+      }
 })
 
 @Injectable()

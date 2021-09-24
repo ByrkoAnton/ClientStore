@@ -1,19 +1,31 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { tap } from "rxjs/operators";
+import { catchError, tap } from "rxjs/operators";
 import { CurrentEditonIdModel, EditionModel } from "src/app/Models/edition/edition-models";
+import { AlertService } from "src/app/services/alert/alert.service";
 import { EditionService } from "src/app/services/edition/edition.service";
 import { GetEdition, StoreCurrentEdition, StoreCurrentEditonId } from "../action/edition-action";
 
 
 @State<EditionModel>({
-    name: 'CurrentEdition'
+    name: 'CurrentEdition',
+    defaults:{
+      authorModels:null,
+      currency: null,
+      dateOfCreation: null,
+      description:null,
+      editionType:null,
+      id:null,
+      price:null,
+      status:null,
+      title:null
+    }
 })
 
 @Injectable()
 export class EditonState {
-    constructor(private editionService:EditionService, private router: Router) { }
+    constructor(private editionService:EditionService, private alertService: AlertService) { }
 
     @Selector()
     static getCurrentEditionId(state: CurrentEditonIdModel):number {
@@ -44,8 +56,10 @@ export class EditonState {
       tap((result) => {
         context.patchState(result);
         localStorage.setItem("currentEdition", JSON.stringify(result))
-      })
-    )
+      }),
+      catchError(async error => 
+        this.alertService.showErrorMessage(error.error))
+       ) 
   }
 
   @Action(StoreCurrentEdition)

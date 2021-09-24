@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { State, Selector, StateContext, Action } from '@ngxs/store';
-import { tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
+import { AlertService } from 'src/app/services/alert/alert.service';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { TokenModel } from '../../Models/account/token-model';
 import { ForgotPassword, RestoreTokens as RestoreTokens, SignIn, SignOut, SignUp } from '../action/auth-action';
 
+
+
 @State<TokenModel>({
-  name: 'auth'
+  name: 'auth',
+  defaults: {
+    accessToken:null,
+    refreshToken:null
+  }
 })
 
 @State({
@@ -24,7 +31,7 @@ import { ForgotPassword, RestoreTokens as RestoreTokens, SignIn, SignOut, SignUp
 
 @Injectable()
 export class AuthState {
-  constructor(private authService: AuthenticationService, private router: Router) { }
+  constructor(private authService: AuthenticationService, private router: Router, private alertService: AlertService) { }
 
   @Selector()
   static getToken(state: TokenModel): string | null {
@@ -33,11 +40,11 @@ export class AuthState {
 
   @Selector()
   static isAuthenticated(state: TokenModel): boolean {
-    return !!state.accessToken;
+    return !state.accessToken;
   }
 
   @Action(SignIn)
-  login(context: StateContext<TokenModel>, action: SignIn) {
+  logIn(context: StateContext<TokenModel>, action: SignIn) {
     return this.authService.signIn(action.payload).pipe(
       tap((result: TokenModel) => {
         context.patchState({
@@ -47,16 +54,21 @@ export class AuthState {
         localStorage.setItem('accessToken', String (result.accessToken));
         localStorage.setItem('refreshToken', String (result.refreshToken));
         this.router.navigateByUrl('store');
-      })
-    )
+      }),
+      catchError(async error => 
+        this.alertService.showErrorMessage(error.error))
+       )
   }
 
   @Action(SignUp)
-  signup(context: null, action: SignUp) {
+  signUp(context: null, action: SignUp) {
     return this.authService.signUp(action.payload).pipe(
       tap(() => {
         this.router.navigateByUrl("/registrationsuccess");
-      }));
+      }),
+      catchError(async error => 
+        this.alertService.showErrorMessage(error.error))
+       )
   }
 
   @Action(ForgotPassword)
@@ -64,7 +76,10 @@ export class AuthState {
     return this.authService.forgotPassword(action.payload).pipe(
       tap(() => {
         this.router.navigateByUrl("/resetpasswordsuccess");
-      }));
+      }),
+      catchError(async error => 
+        this.alertService.showErrorMessage(error.error))
+       )
   }
 
   @Action(RestoreTokens)

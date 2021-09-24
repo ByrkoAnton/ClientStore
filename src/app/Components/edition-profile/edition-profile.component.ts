@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { EditionInCartModel, CartModel  } from 'src/app/Models/cart/cart-model';
 import { EditionModel } from 'src/app/Models/edition/edition-models';
+import { AlertService } from 'src/app/services/alert/alert.service';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { EventEmitterService } from 'src/app/services/event-emitter/event-emitter.service';
 import { StoreItemsInCartCount } from 'src/app/State-manager/action/cart-action';
@@ -17,7 +18,7 @@ import Swal from 'sweetalert2';
 
 export class EditionProfileComponent implements OnInit {
 
-  constructor(private store: Store, private eventEmitterService: EventEmitterService,  private cartService: CartService) {
+  constructor(private store: Store, private eventEmitterService: EventEmitterService,  private alertService: AlertService) {
   }
 
   edition$ = this.store.select(EditionState.getCurrentEdition)
@@ -56,7 +57,7 @@ export class EditionProfileComponent implements OnInit {
      var cart:EditionInCartModel[] = [];
       cart.push(editionToCart)
       localStorage.setItem('userCart', JSON.stringify(cart));
-      this.showSuccesMsg(this.edition.title!, this.editionQty.toString())
+      this.alertService.showSuccesMessage(this.edition.title!, this.editionQty.toString() + " copies added to cart")
       localStorage.setItem('cartItemsCount', JSON.stringify(editionToCart.editionQty));
       this.storeCountItemsInCart(editionToCart.editionQty);
       this.editionQty =1;
@@ -71,7 +72,7 @@ export class EditionProfileComponent implements OnInit {
     {
       cart.push(editionToCart);
       localStorage.setItem('userCart', JSON.stringify(cart));
-      this.showSuccesMsg(this.edition.title!, this.editionQty.toString())
+      this.alertService.showSuccesMessage(this.edition.title!, this.editionQty.toString() + " copies added to cart")
       localStorage.setItem('cartItemsCount', JSON.stringify(this.countEditionsInCart(cart)));
       this.storeCountItemsInCart(this.countEditionsInCart(cart));
       this.editionQty =1;
@@ -79,7 +80,7 @@ export class EditionProfileComponent implements OnInit {
     }
       cart[productPositionInCart].editionQty!+=this.editionQty
       localStorage.setItem('userCart', JSON.stringify(cart));
-      this.showSuccesMsg(this.edition.title!, this.editionQty.toString())
+      this.alertService.showSuccesMessage(this.edition.title!, this.editionQty.toString() + " copies added to cart")
       localStorage.setItem('cartItemsCount', JSON.stringify(this.countEditionsInCart(cart)));
       this.storeCountItemsInCart(this.countEditionsInCart(cart));
       this.editionQty =1;
@@ -98,16 +99,6 @@ export class EditionProfileComponent implements OnInit {
   {
     var userCart :EditionInCartModel[] = JSON.parse(localStorage.getItem('userCart')!); 
     return userCart
-  }
-
-  showSuccesMsg(_title: string, _text: string)
-  {
-    Swal.fire({
-      icon: 'success',
-      confirmButtonColor:"#378f7b",
-      title:_title,
-      text: _text + " copies added to cart" 
-    });
   }
 
   storeCountItemsInCart(itemsCount: number | null) {

@@ -5,7 +5,7 @@
         Book Store
     </a>
     <form class="form-inline">
-        <a class="navbar-brand" routerLink="/#" (click)="openCart()"> 
+        <a class="navbar-brand" [routerLink]="" (click)="openCart()"> 
             <ng-container class="row" class ="items" *ngIf="!isCartEmpty && !isCartFull"> 
                 <span class="badge badge-notify"><a>{{cartItemsCount$ | async}}</a></span> 
             </ng-container>

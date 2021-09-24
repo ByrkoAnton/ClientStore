@@ -1,20 +1,26 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
-import { tap } from "rxjs/operators";
+import { catchError, tap } from "rxjs/operators";
 import { UserModel } from "src/app/Models/user/user-model";
+import { AlertService } from "src/app/services/alert/alert.service";
 import { AuthenticationService } from "src/app/services/authentication/authentication.service";
 import { UserService } from "src/app/services/user/user.service";
 import { ChangePassword, GetUser, UpdateUser } from "../action/user-acton";
 
 
   @State<UserModel>({
-    name: 'UserData'
+    name: 'UserData',
+    defaults:{
+      email:null,
+      firstName:null,
+      lastName:null
+    }
   })
 
 @Injectable()
 export class UserState {
-  constructor(private userService:UserService, private authService:AuthenticationService, private router: Router) { }
+  constructor(private userService:UserService, private alertService: AlertService) { }
   @Selector()
   static getUser(state: UserModel): UserModel | null {
     return state;
@@ -29,8 +35,10 @@ export class UserState {
             lastName: result.lastName,
             firstName: result.firstName
         });
-      })
-    )
+      }),
+      catchError(async error => 
+        this.alertService.showErrorMessage(error.error))
+       )
   }
 
   @Action(UpdateUser)
@@ -38,12 +46,19 @@ export class UserState {
     return this.userService.updateUser(action.payload).pipe(
       tap(() => {
         context.patchState(action.payload)
-      }));
+      }),
+      catchError(async error => 
+        this.alertService.showErrorMessage(error.error))
+       );
   }
+
   @Action(ChangePassword)
   changePassword(context: null, action: UpdateUser) {
     return this.userService.changePassword(action.payload).pipe(
       tap(() => {
-    }));
+    }),
+    catchError(async error => 
+      this.alertService.showErrorMessage(error.error))
+     );
   }
 }

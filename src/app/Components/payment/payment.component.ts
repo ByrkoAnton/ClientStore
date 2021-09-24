@@ -11,9 +11,7 @@ import { EditionForPayModel } from 'src/app/Models/edition/edition-models';
 import { CartComponent } from '../cart/cart.component';
 import { EventEmitterService } from 'src/app/services/event-emitter/event-emitter.service';
 import { PaymentState } from 'src/app/State-manager/state/payment-state';
-import { map } from 'rxjs/operators';
-import { PaymentService } from 'src/app/services/payment/payment.service';
-import { PaymentModel, ResultPayModel } from 'src/app/Models/payment/payment-model';
+import { AlertService } from 'src/app/services/alert/alert.service';
 
 @Component({
   selector: 'app-payment',
@@ -61,7 +59,7 @@ export class PaymentComponent implements OnInit {
 
   constructor(private store: Store, public activeModal: NgbActiveModal,
     private fb: FormBuilder, private stripeService: StripeService,
-    private eventEmitterService: EventEmitterService) {
+    private eventEmitterService: EventEmitterService, private alertService: AlertService) {
   }
 
 
@@ -97,11 +95,7 @@ export class PaymentComponent implements OnInit {
       .createToken(this.card.element)
       .subscribe((result) => {
         if (result.error) {
-          Swal.fire({
-            icon: 'error',
-            title: result.error.message,
-            confirmButtonColor: '#378f7b'
-          })
+          this.alertService.showErrorMessage(result.error.message!)
           return;
         }
 
@@ -124,7 +118,6 @@ export class PaymentComponent implements OnInit {
     Swal.fire({
       icon: 'success',
       confirmButtonColor:"#378f7b",
-      
       title:"Order number: "+_title,
       text: _text  
     }).then(()=>{
