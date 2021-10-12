@@ -16,7 +16,6 @@ export class SignOutComponent implements OnInit {
   signOut(): void {
     this.store.dispatch(new SignOut())
   }
-  
   ngOnInit(): void {
   }
 }

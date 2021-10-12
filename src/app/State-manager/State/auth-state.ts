@@ -5,7 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { TokenModel } from '../../Models/account/token-model';
-import { ForgotPassword, RestoreTokens as RestoreTokens, SignIn, SignOut, SignUp } from '../action/auth-action';
+import { ForgotPassword, RestoreTokens as RestoreTokens, SignIn, SignOut, SignUp, UpdateTokens } from '../action/auth-action';
 
 
 
@@ -40,7 +40,7 @@ export class AuthState {
 
   @Selector()
   static isAuthenticated(state: TokenModel): boolean {
-    return !state.accessToken;
+    return !!state.accessToken;
   }
 
   @Action(SignIn)
@@ -88,6 +88,22 @@ export class AuthState {
       accessToken: action.payload.accessToken,
       refreshToken: action.payload.refreshToken
     });
+  }
+
+  @Action(UpdateTokens)
+  updateTokens(context: StateContext<TokenModel>, action: UpdateTokens) {
+    return this.authService.updateTokens(action.payload).pipe(
+      tap((result: TokenModel) => {
+        context.patchState({
+          accessToken: result.accessToken,
+          refreshToken: result.refreshToken
+        });
+        localStorage.setItem('accessToken', String (result.accessToken));
+        localStorage.setItem('refreshToken', String (result.refreshToken));
+      }),
+      catchError(async error => 
+        this.alertService.showErrorMessage(error.error))
+       )
   }
   
   @Action(SignOut)

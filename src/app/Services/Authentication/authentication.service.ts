@@ -28,5 +28,9 @@ export class AuthenticationService {
     return this.http.post('https://localhost:5001/api/User/ForgotPassword', model); 
     } 
 
+    updateTokens(model:TokenModel): Observable<TokenModel> {
+      return this.http.post<TokenModel>('https://localhost:5001/api/Account/updateTokens', model); 
+    } 
+
     
 }

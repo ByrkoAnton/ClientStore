@@ -30,3 +30,8 @@ export class SignOut {
   static readonly type = '[Auth] SignOut';
   constructor() {}
 }
+
+export class UpdateTokens {
+  static readonly type = '[Auth] UpdateTokens';
+  constructor(public payload: TokenModel) {}
+}

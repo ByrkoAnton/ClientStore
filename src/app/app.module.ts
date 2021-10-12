@@ -27,6 +27,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { CartState } from './State-manager/state/cart-state';
 import { OrderPaymentModule } from './modules/order-payment/order-payment.module';
 import { PaymentState } from './State-manager/state/payment-state';
+import { ErrorInterceptor } from './interceptors/error-interseptor/error.interceptor';
 
 
 @NgModule({
@@ -67,6 +68,11 @@ import { PaymentState } from './State-manager/state/payment-state';
         provide: HTTP_INTERCEPTORS,
         useClass: AuthInterceptorInterceptor,
         multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
     },
     EventEmitterService
   ],

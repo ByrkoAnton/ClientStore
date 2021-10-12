@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { State, Selector, StateContext, Action } from '@ngxs/store';
 import { catchError, tap } from 'rxjs/operators';
-import { CurrentEditonIdModel, EditionModel } from 'src/app/Models/edition/edition-models';
-import { SliderModel } from 'src/app/Models/slider/slider-model';
+import { EditionModel } from 'src/app/Models/edition/edition-models';
 import { StoreModel } from 'src/app/Models/store/store-model';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { StoreService } from 'src/app/services/store/store.service';
@@ -15,8 +13,8 @@ import { GetFiltratedEditions} from '../action/store-action';
     defaults:{
       models:null,
       pageModel:null,
-      sliderCeil:null,
-      sliderFloor:null
+      sliderCeil:0,
+      sliderFloor:0
 
     }
   })
