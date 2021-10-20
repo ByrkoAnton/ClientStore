@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { EditionInCartModel, CartModel  } from 'src/app/Models/cart/cart-model';
+import { EditionInCartModel} from 'src/app/Models/cart/cart-model';
 import { EditionModel } from 'src/app/Models/edition/edition-models';
 import { AlertService } from 'src/app/services/alert/alert.service';
-import { CartService } from 'src/app/services/cart/cart.service';
 import { EventEmitterService } from 'src/app/services/event-emitter/event-emitter.service';
 import { StoreItemsInCartCount } from 'src/app/State-manager/action/cart-action';
 import { GetEdition } from 'src/app/State-manager/action/edition-action';
 import { EditonState as EditionState } from 'src/app/State-manager/state/edition-state';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edition-profile',

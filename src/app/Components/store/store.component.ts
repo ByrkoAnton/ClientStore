@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { RoutingConstants } from 'src/app/app-constants';
 import { EventEmitterService } from 'src/app/services/event-emitter/event-emitter.service';
 import { SignOut } from 'src/app/State-manager/action/auth-action';
 import { StoreCurrentEditonId } from 'src/app/State-manager/action/edition-action';
@@ -19,6 +20,7 @@ import { StoreState } from 'src/app/State-manager/state/store-state';
 })
 
 export class StoreComponent implements OnInit {
+  editionProfileRote=RoutingConstants.EditionProfile;
   userQuestionUpdate = new Subject<string>();
   isAuthenticated!: boolean;
   auth = this.store.select(AuthState.isAuthenticated).subscribe(res => {
@@ -292,7 +294,7 @@ export class StoreComponent implements OnInit {
       this.store.dispatch(new StoreCurrentEditonId({
         Id: editionId
       }))
-      this.router.navigateByUrl('editionprofile');
+      this.router.navigateByUrl(this.editionProfileRote);
     }
   }
 }

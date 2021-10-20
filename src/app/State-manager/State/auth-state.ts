@@ -64,7 +64,7 @@ export class AuthState {
   signUp(context: null, action: SignUp) {
     return this.authService.signUp(action.payload).pipe(
       tap(() => {
-        this.router.navigateByUrl("/registrationsuccess");
+        this.alertService.showSuccesMessage("Successful registration", "Check your email and confirm it")
       }),
       catchError(async error => 
         this.alertService.showErrorMessage(error.error))
@@ -75,7 +75,7 @@ export class AuthState {
   forgotPassword(context: null, action: ForgotPassword) {
     return this.authService.forgotPassword(action.payload).pipe(
       tap(() => {
-        this.router.navigateByUrl("/resetpasswordsuccess");
+        this.alertService.showSuccesMessage("New password has been sent to email", "")
       }),
       catchError(async error => 
         this.alertService.showErrorMessage(error.error))

@@ -12,19 +12,20 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { StoreComponent } from './components/store/store.component';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { AuthGuard } from './Guards/auth.guard';
+import { RoutingConstants } from './app-constants';
 
 const routes: Routes = [
-{path: 'signin', component: SignInComponent}, 
-{ path: 'store', component:StoreComponent},
-{path: 'signup', component: SignUpComponent},
-{path: 'registrationsuccess', component: SignUpSuccessComponent},
-{path: 'forgotpassword', component: ForgotPasswordComponent},
+{path: RoutingConstants.SignIn, component: SignInComponent}, 
+{path: RoutingConstants.Store, component:StoreComponent},
+{path: RoutingConstants.SignUp, component: SignUpComponent},
+{path: RoutingConstants.RegistrationSucces, component: SignUpSuccessComponent},
+{path: RoutingConstants.ForgotPassword, component: ForgotPasswordComponent},
 {path: 'resetpasswordsuccess', component: ResetPasswordSuccessComponent},
-{path: 'signout', component: SignOutComponent},
-{path: 'getuser', component: UserProfileComponent, canActivate: [AuthGuard]},
-{path: 'editionprofile', component: EditionProfileComponent},
-{path: 'navbar', component: NavbarComponent},
-{path: 'cart', component: CartComponent}
+{path: RoutingConstants.SignOut, component: SignOutComponent},
+{path: RoutingConstants.GetUser, component: UserProfileComponent, canActivate: [AuthGuard]},
+{path: RoutingConstants.EditionProfile, component: EditionProfileComponent},
+{path: RoutingConstants.Navbar, component: NavbarComponent},
+{path: RoutingConstants.Cart, component: CartComponent}
 ];
 
 

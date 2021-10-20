@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
+import { ErrorConstants, RoutingConstants } from 'src/app/app-constants';
 import {SignInModel} from '../../../Models/account/sign-in-model';
 
 import { SignIn } from '../../../State-manager/action/auth-action';
@@ -12,18 +13,10 @@ import { SignIn } from '../../../State-manager/action/auth-action';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
+  signUpRoute=RoutingConstants.SignUp;
+  forgotePasswordRoute=RoutingConstants.ForgotPassword;
 
-  error_messages = {
-    
-    'email': [
-      { type: 'required', message: 'Email is required' },
-      { type: 'email', message: 'Enter a valid email address' }
-    ],
-
-    'password': [
-      { type: 'required', message: 'Password is required' }, 
-    ],
-  };
+  error_messages = ErrorConstants.SignInFormErrors;
 
   signInModel:SignInModel ={} as SignInModel;
   signInForm: FormGroup;
@@ -35,13 +28,13 @@ export class SignInComponent implements OnInit {
     })
   } 
   
+  ngOnInit(): void {}
+
   signIn():void{
   this.store.dispatch(new SignIn({
     email: this.signInForm.get('email')?.value, 
     password: this.signInForm.get('password')?.value})
   )}
-
-  ngOnInit(): void {}
  }
 
 

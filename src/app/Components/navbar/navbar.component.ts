@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngxs/store';
-import { EventEmitterService } from 'src/app/services/event-emitter/event-emitter.service';
+import { RoutingConstants } from 'src/app/app-constants';
 import { SignOut } from 'src/app/State-manager/action/auth-action';
 import { StoreItemsInCartCount } from 'src/app/State-manager/action/cart-action';
 import { AuthState } from 'src/app/State-manager/state/auth-state';
@@ -16,6 +16,9 @@ import { CartComponent } from '../cart/cart.component';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  signInRoute = RoutingConstants.SignIn;
+  storeRoute = RoutingConstants.Store;
+  profileRoute =RoutingConstants.GetUser;
   isAuthenticated!: boolean;
   auth = this.store.select(AuthState.isAuthenticated).subscribe(res => {
     this.isAuthenticated = res;
