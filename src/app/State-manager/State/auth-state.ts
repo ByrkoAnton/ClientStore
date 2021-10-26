@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { State, Selector, StateContext, Action } from '@ngxs/store';
 import { catchError, tap } from 'rxjs/operators';
+import { ActionConstants, RoutingConstants, StateConstants, TechnicalConstants } from 'src/app/app-constants';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { TokenModel } from '../../Models/account/token-model';
@@ -10,7 +11,7 @@ import { ForgotPassword, RestoreTokens as RestoreTokens, SignIn, SignOut, SignUp
 
 
 @State<TokenModel>({
-  name: 'auth',
+  name: StateConstants.Auth,
   defaults: {
     accessToken:null,
     refreshToken:null
@@ -18,15 +19,15 @@ import { ForgotPassword, RestoreTokens as RestoreTokens, SignIn, SignOut, SignUp
 })
 
 @State({
-  name: 'register'
+  name: StateConstants.AuthNameRegister
 })
 
 @State({
-  name: 'gettokens'
+  name: StateConstants.AuthNameGetTokens
 })
 
 @State({
-  name: 'signout'
+  name: StateConstants.AuthNameSignOut
 })
 
 @Injectable()
@@ -51,9 +52,9 @@ export class AuthState {
           accessToken: result.accessToken,
           refreshToken: result.refreshToken
         });
-        localStorage.setItem('accessToken', String (result.accessToken));
-        localStorage.setItem('refreshToken', String (result.refreshToken));
-        this.router.navigateByUrl('store');
+        localStorage.setItem(TechnicalConstants.AccessToken, String (result.accessToken));
+        localStorage.setItem(TechnicalConstants.RefreshToken, String (result.refreshToken));
+        this.router.navigateByUrl(RoutingConstants.Store);
       }),
       catchError(async error => 
         this.alertService.showErrorMessage(error.error))
@@ -64,7 +65,8 @@ export class AuthState {
   signUp(context: null, action: SignUp) {
     return this.authService.signUp(action.payload).pipe(
       tap(() => {
-        this.alertService.showSuccesMessage("Successful registration", "Check your email and confirm it")
+        this.alertService.showSuccesMessage(StateConstants.AuthSignUpSuccesMsg,
+           StateConstants.AuthSignUpConfirmEmailMsg)
       }),
       catchError(async error => 
         this.alertService.showErrorMessage(error.error))
@@ -75,7 +77,7 @@ export class AuthState {
   forgotPassword(context: null, action: ForgotPassword) {
     return this.authService.forgotPassword(action.payload).pipe(
       tap(() => {
-        this.alertService.showSuccesMessage("New password has been sent to email", "")
+        this.alertService.showSuccesMessage(StateConstants.AuthSendPasworgMsg)
       }),
       catchError(async error => 
         this.alertService.showErrorMessage(error.error))
@@ -98,8 +100,8 @@ export class AuthState {
           accessToken: result.accessToken,
           refreshToken: result.refreshToken
         });
-        localStorage.setItem('accessToken', String (result.accessToken));
-        localStorage.setItem('refreshToken', String (result.refreshToken));
+        localStorage.setItem(TechnicalConstants.AccessToken, String (result.accessToken));
+        localStorage.setItem(TechnicalConstants.RefreshToken, String (result.refreshToken));
       }),
       catchError(async error => 
         this.alertService.showErrorMessage(error.error))
@@ -112,8 +114,8 @@ export class AuthState {
           refreshToken: null,
           accessToken: null,
         });
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
+        localStorage.removeItem(TechnicalConstants.AccessToken);
+        localStorage.removeItem(TechnicalConstants.RefreshToken);
   }
 }
 

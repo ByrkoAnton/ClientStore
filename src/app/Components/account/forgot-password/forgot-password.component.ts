@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { ErrorConstants } from 'src/app/app-constants';
+import { ErrorConstants, TechnicalConstants } from 'src/app/app-constants';
 import { ForgotPassword } from 'src/app/State-manager/action/auth-action';
 
 
@@ -23,7 +23,7 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   forgotPassword():void{
-  this.store.dispatch(new ForgotPassword({email: this.forgotPasswordForm.get('email')?.value}))
+  this.store.dispatch(new ForgotPassword({email: this.forgotPasswordForm.get(TechnicalConstants.Email)?.value}))
   }
 
 }

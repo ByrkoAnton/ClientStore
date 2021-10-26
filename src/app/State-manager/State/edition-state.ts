@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { catchError, tap } from "rxjs/operators";
+import { StateConstants, TechnicalConstants } from "src/app/app-constants";
 import { CurrentEditonIdModel, EditionModel } from "src/app/Models/edition/edition-models";
 import { AlertService } from "src/app/services/alert/alert.service";
 import { EditionService } from "src/app/services/edition/edition.service";
@@ -9,7 +10,7 @@ import { GetEdition, StoreCurrentEdition, StoreCurrentEditonId } from "../action
 
 
 @State<EditionModel>({
-    name: 'CurrentEdition',
+    name: StateConstants.EditionStateName,
     defaults:{
       authorModels:null,
       currency: null,
@@ -47,7 +48,7 @@ export class EditonState {
         context.patchState({
           Id: action.payload.Id
         }); 
-        localStorage.setItem("currentEditonId", JSON.stringify(action.payload.Id))   
+        localStorage.setItem(TechnicalConstants.CurrentEditonId, JSON.stringify(action.payload.Id))   
   }
 
     @Action(GetEdition)
@@ -55,7 +56,7 @@ export class EditonState {
     return this.editionService.getEditions(action.payload).pipe(
       tap((result) => {
         context.patchState(result);
-        localStorage.setItem("currentEdition", JSON.stringify(result))
+        localStorage.setItem(TechnicalConstants.CurrentEditonId, JSON.stringify(result))
       }),
       catchError(async error => 
         this.alertService.showErrorMessage(error.error))

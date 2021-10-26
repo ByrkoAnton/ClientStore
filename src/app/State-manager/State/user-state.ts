@@ -1,16 +1,15 @@
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { catchError, tap } from "rxjs/operators";
+import { StateConstants } from "src/app/app-constants";
 import { UserModel } from "src/app/Models/user/user-model";
 import { AlertService } from "src/app/services/alert/alert.service";
-import { AuthenticationService } from "src/app/services/authentication/authentication.service";
 import { UserService } from "src/app/services/user/user.service";
 import { ChangePassword, GetUser, UpdateUser } from "../action/user-acton";
 
 
   @State<UserModel>({
-    name: 'UserData',
+    name: StateConstants.UserStateName,
     defaults:{
       email:null,
       firstName:null,

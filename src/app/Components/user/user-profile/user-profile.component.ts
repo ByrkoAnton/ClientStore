@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
+import { ErrorConstants, RegExpConstants, TechnicalConstants, UserProfileConstants } from 'src/app/app-constants';
 import { ChangePassword, GetUser, UpdateUser } from 'src/app/State-manager/action/user-acton';
 import { UserState } from 'src/app/State-manager/state/user-state';
 
@@ -14,46 +15,14 @@ export class UserProfileComponent implements OnInit {
   changePasswordForm: FormGroup;
   isDisable: boolean = true;
 
-  error_messages = {
-    'userFirstName': [
-      { type: 'required', message: 'First Name is required' },
-      { type: 'minlength', message: 'Min length 2' }
-    ],
-
-    'userLastName': [
-      { type: 'required', message: 'Last Name is required' }
-    ],
-
-    'userEmail': [
-      { type: 'required', message: 'Email is required' },
-      { type: 'email', message: 'Enter a valid email address' }
-    ],
-
-    'currentPassword': [
-      { type: 'required', message: 'Password is required' },
-    ],
-
-    'newPassword': [
-      { type: 'required', message: 'Password is required' },
-      { type: 'minlength', message: 'Min password length 8' },
-      { type: 'pattern', message: 'One ore more lowercase characters' },
-      { type: 'pattern', message: 'One ore more uppercase characters' },
-      { type: 'pattern', message: 'Any symbols " @#$%_!%&* "' },
-      { type: 'pattern', message: 'One more digit from 0-9' }
-    ],
-    'confirmPassword': [
-      { type: 'required', message: 'Password is required' },
-      { type: 'minlength', message: 'Min password length 8' },
-    ],
-  };
-
-  regExpPassword: string = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%_!%&*]).{8,20})";
+  error_messages = ErrorConstants.UserProfileFormErrors;
 
   constructor(private store: Store, public formBuilder: FormBuilder) {
     this.changePasswordForm = formBuilder.group({
-      currentPassword: new FormControl('', Validators.compose([Validators.required])),
-      newPassword: new FormControl('', Validators.compose([Validators.minLength(8), Validators.pattern(this.regExpPassword)])),
-      confirmPassword: new FormControl('')
+      currentPassword: new FormControl(TechnicalConstants.EmptyString, Validators.compose([Validators.required])),
+      newPassword: new FormControl(TechnicalConstants.EmptyString, Validators.compose([Validators.minLength(TechnicalConstants.PasswordMinLenghts),
+         Validators.pattern(RegExpConstants.Password)])),
+      confirmPassword: new FormControl(TechnicalConstants.EmptyString)
     }, {
       validators: this.isPasswordsMatch.bind(this)
     }
@@ -63,9 +32,9 @@ export class UserProfileComponent implements OnInit {
   }
 
   isPasswordsMatch(changePasswordForm: FormGroup) {
-    const password = changePasswordForm.get('newPassword')?.value;
-    const confirmPassword  = changePasswordForm.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : {passwordNotMatch:'passwordNotMatch'};
+    const password = changePasswordForm.get(TechnicalConstants.NewPassword)?.value;
+    const confirmPassword  = changePasswordForm.get(TechnicalConstants.ConfirmPassword)?.value;
+    return password === confirmPassword ? null : {passwordNotMatch:TechnicalConstants.PasswordNotMatch};
   }
 
 
@@ -75,8 +44,10 @@ export class UserProfileComponent implements OnInit {
       this.userForm = new FormGroup
         ({
           userEmail: new FormControl(result?.email, Validators.compose([Validators.required, Validators.email])),
-          userFirstName: new FormControl(result?.firstName, Validators.compose([Validators.required, Validators.minLength(2)])),
-          userLastName: new FormControl(result?.lastName, Validators.compose([Validators.required, Validators.minLength(2)]))
+          userFirstName: new FormControl(result?.firstName, Validators.compose([Validators.required,
+             Validators.minLength(TechnicalConstants.FirstNameMinLenghts)])),
+          userLastName: new FormControl(result?.lastName, Validators.compose([Validators.required,
+             Validators.minLength(TechnicalConstants.LastNameMinLenghts)]))
         })
       this.userForm.disable()
     })
@@ -85,9 +56,9 @@ export class UserProfileComponent implements OnInit {
   Edit() {
     this.userForm.reset();
     this.changePasswordForm.reset();
-    this.userForm.get('userEmail')?.setValue(this.store.selectSnapshot(UserState.getUser)?.email);
-    this.userForm.get('userFirstName')?.setValue(this.store.selectSnapshot(UserState.getUser)?.firstName);
-    this.userForm.get('userLastName')?.setValue(this.store.selectSnapshot(UserState.getUser)?.lastName);
+    this.userForm.get(UserProfileConstants.FormUserEmail)?.setValue(this.store.selectSnapshot(UserState.getUser)?.email);
+    this.userForm.get(UserProfileConstants.FormUserName)?.setValue(this.store.selectSnapshot(UserState.getUser)?.firstName);
+    this.userForm.get(UserProfileConstants.FormUserLastName)?.setValue(this.store.selectSnapshot(UserState.getUser)?.lastName);
     this.userForm.enabled ? this.userForm.disable() : this.userForm.enable();
     this.changePasswordForm.enabled ? this.changePasswordForm.disable() : this.changePasswordForm.enable();
   }
@@ -99,9 +70,9 @@ export class UserProfileComponent implements OnInit {
   userUpdate() {
     if (this.userForm.dirty) {
       this.store.dispatch(new UpdateUser({
-        firstName: this.userForm.get('userFirstName')?.value,
-        lastName: this.userForm.get('userLastName')?.value,
-        email: this.userForm.get('userEmail')?.value
+        firstName: this.userForm.get(UserProfileConstants.FormUserName)?.value,
+        lastName: this.userForm.get(UserProfileConstants.FormUserLastName)?.value,
+        email: this.userForm.get(UserProfileConstants.FormUserEmail)?.value
       }
       ))
       this.userForm.disable() 
@@ -111,8 +82,8 @@ export class UserProfileComponent implements OnInit {
   changePassword(): void {
     if (this.changePasswordForm.valid) {
       this.store.dispatch(new ChangePassword({
-        currentPassword: this.changePasswordForm.get('currentPassword')?.value,
-        newPassword: this.changePasswordForm.get('newPassword')?.value
+        currentPassword: this.changePasswordForm.get(TechnicalConstants.CurrentPassword)?.value,
+        newPassword: this.changePasswordForm.get(TechnicalConstants.NewPassword)?.value
       }))
     }
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { ErrorConstants, RoutingConstants } from 'src/app/app-constants';
+import { ErrorConstants, RoutingConstants, TechnicalConstants } from 'src/app/app-constants';
 import {SignInModel} from '../../../Models/account/sign-in-model';
 
 import { SignIn } from '../../../State-manager/action/auth-action';
@@ -32,8 +32,8 @@ export class SignInComponent implements OnInit {
 
   signIn():void{
   this.store.dispatch(new SignIn({
-    email: this.signInForm.get('email')?.value, 
-    password: this.signInForm.get('password')?.value})
+    email: this.signInForm.get(TechnicalConstants.Email)?.value, 
+    password: this.signInForm.get(TechnicalConstants.Password)?.value})
   )}
  }
 

@@ -1,16 +1,17 @@
+import { ActionConstants } from "src/app/app-constants";
 import { CurrentEditonIdModel, EditionModel } from "src/app/Models/edition/edition-models";
 
 export class GetEdition {
-    static readonly type = '[Edition] Edition';
+    static readonly type = ActionConstants.EditionGet;
     constructor(public payload: CurrentEditonIdModel) {}
   }
 
   export class StoreCurrentEdition {
-    static readonly type = '[Edition] Edition';
+    static readonly type = ActionConstants.EditionStoreCurrent;
     constructor(public payload: EditionModel) {}
   }
 
   export class StoreCurrentEditonId {
-    static readonly type = '[Edition] CurrentEditonId';
+    static readonly type = ActionConstants.EditionStoreCurrentId;
     constructor(public payload: CurrentEditonIdModel) {}
   }

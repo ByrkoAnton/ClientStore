@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { RoutingConstants } from 'src/app/app-constants';
+import { RoutingConstants, StoreConstants } from 'src/app/app-constants';
 import { EventEmitterService } from 'src/app/services/event-emitter/event-emitter.service';
 import { SignOut } from 'src/app/State-manager/action/auth-action';
 import { StoreCurrentEditonId } from 'src/app/State-manager/action/edition-action';
@@ -28,32 +28,32 @@ export class StoreComponent implements OnInit {
   });
 
   editions$ = this.store.select(StoreState.getEditions)
-  countElementOnPage = 12;
-  page = 1;
+  countElementOnPage = StoreConstants.DefaultCountElementOnPage;
+  page = StoreConstants.FromFirsPage;
   fullCounts!: number;
   search!: string;
   isAscending: boolean = true;
-  propertyForSort: string = "price";
-  currency: string = "1";
-  currencyLable: string = "$";
-  editionTypes: string[] = ["1", "2", "3"];
+  propertyForSort: string = StoreConstants.DefaultSortingProperty;
+  currency: string = StoreConstants.DefaultCurrency;
+  currencyLable: string = StoreConstants.DefaultCurrencyLable;
+  editionTypes: string[] = StoreConstants.DefaultEditionsType;
 
   sliderFloor: number | undefined;
   sliderCeil: number | undefined;
 
   showDefaultSlider: boolean = true;
-  sliderValueDefault: number = 0;
-  sliderHighValueDefault: number = 0;
+  sliderValueDefault: number = StoreConstants.DefaultSliderValue;
+  sliderHighValueDefault: number = StoreConstants.DefaulSlidertHighValue;
 
-  sliderValueForQuery: number = 0;
-  sliderHighValueForQuery: number = 0;
+  sliderValueForQuery: number = StoreConstants.DefaultSliderValueForQuery;
+  sliderHighValueForQuery: number = StoreConstants.DefaultSliderHighValueForQuery;
 
-  inputValueForQuery: number = 0;
-  inputHighValueForQuery: number = 0;
+  inputValueForQuery: number = StoreConstants.DefaultInputValueForQuery;
+  inputHighValueForQuery: number = StoreConstants.DefaultInputHighValueForQuery;
 
   options: Options = {
-    floor: 0,
-    ceil: 0,
+    floor: StoreConstants.DefaultSliderFloor,
+    ceil: StoreConstants.DefaultSliderCeil,
     disabled: false,
     hideLimitLabels: false,
     hidePointerLabels: true
@@ -63,7 +63,7 @@ export class StoreComponent implements OnInit {
   constructor(private store: Store, private router: Router, 
     private eventEmitterService: EventEmitterService) {
     this.userQuestionUpdate.pipe(
-      debounceTime(1000),
+      debounceTime(StoreConstants.OneSecond),
       distinctUntilChanged())
       .subscribe(() => {
         this.getFiltratedEditions();
@@ -79,8 +79,8 @@ export class StoreComponent implements OnInit {
     });
 
     this.store.select(StoreState.getSliderParams).subscribe((x: [number, number]) => {
-      this.sliderFloor = x[0];
-      this.sliderCeil = x[1];
+      this.sliderFloor = x[StoreConstants.SliderFloorPosition];
+      this.sliderCeil = x[StoreConstants.SliderCeilPosition];
       if (this.sliderCeil !== undefined && this.sliderFloor !== undefined) {
         this.changeSliderOptions(this.sliderFloor, this.sliderCeil);
         this.setSliderDefaultParams(this.sliderFloor, this.sliderCeil);
@@ -121,7 +121,7 @@ export class StoreComponent implements OnInit {
       return;
     }
 
-    if (this.inputHighValueForQuery === 0) {
+    if (this.inputHighValueForQuery === StoreConstants.InputHighValueForQueryNotInstalled) {
       this.isPriceInputsValid = false;
       return;
     }
@@ -152,7 +152,8 @@ export class StoreComponent implements OnInit {
   }
 
   getFiltratedEditions(_minPrice: number | null = null, _maxPrice: number | null = null,
-    _currentSliderFlor: number = 0, _currentSliderCeil: number = 0): void {
+    _currentSliderFlor: number = StoreConstants.DefaultSliderFloorForGetMethod,
+    _currentSliderCeil: number = StoreConstants.DefaultSliderCeilForGetMethod): void {
     this.store.dispatch(new GetFiltratedEditions({
       currentPage: this.page,
       pageSize: this.countElementOnPage,
@@ -199,7 +200,7 @@ export class StoreComponent implements OnInit {
       for (var i = 0; i < this.editionTypes.length; i++) {
 
         if (this.editionTypes[i] === value) {
-          this.editionTypes.splice(i, 1);
+          this.editionTypes.splice(i, StoreConstants.DelOneElement);
         }
       }
     }
@@ -210,30 +211,30 @@ export class StoreComponent implements OnInit {
 
   sortChange($event: any) {
     var value = $event.target.value;
-    if (value === "price asc") {
+    if (value === StoreConstants.SortigByPriceAsc) {
       this.isAscending = true;
-      this.propertyForSort = "price";
+      this.propertyForSort = StoreConstants.SortingParamsPrice;
       this.getFiltratedEditions();
       return;
     }
 
-    if (value === "price des") {
+    if (value === StoreConstants.SortigByPriceDes) {
       this.isAscending = false;
-      this.propertyForSort = "price";
+      this.propertyForSort = StoreConstants.SortingParamsPrice;
       this.getFiltratedEditions();
       return;
     }
 
-    if (value === "title asc") {
+    if (value === StoreConstants.SortigByTitleAsc) {
       this.isAscending = true;
-      this.propertyForSort = "title";
+      this.propertyForSort = StoreConstants.SortingParamsTitle;
       this.getFiltratedEditions();
       return;
     }
 
-    if (value === "title des") {
+    if (value === StoreConstants.SortigByTitleDes) {
       this.isAscending = false;
-      this.propertyForSort = "title";
+      this.propertyForSort = StoreConstants.SortingParamsTitle;
       this.getFiltratedEditions();
       return;
     }
@@ -241,39 +242,39 @@ export class StoreComponent implements OnInit {
 
   currencyTypeChange($event: any) {
     var value = $event.target.value;
-    if (value === "USD") {
-      this.currency = "1";
-      this.currencyLable = "$"
+    if (value === StoreConstants.SortigByCurrencyUsd) {
+      this.currency = StoreConstants.UsdNumber;
+      this.currencyLable = StoreConstants.UsdLable
       this.getFiltratedEditions()
     }
 
-    if (value === "EUR") {
-      this.currency = "2";
-      this.currencyLable = "&euro;";
+    if (value === StoreConstants.SortigByCurrencyEur) {
+      this.currency = StoreConstants.EurNumber;
+      this.currencyLable = StoreConstants.EurLable;
       this.getFiltratedEditions()
     }
 
-    if (value === "GBP") {
-      this.currency = "3";
-      this.currencyLable = "&pound;";
+    if (value === StoreConstants.SortigByCurrencyGbp) {
+      this.currency = StoreConstants.GbpNumber;
+      this.currencyLable = StoreConstants.GbpLable;
       this.getFiltratedEditions()
     }
 
-    if (value === "CHF") {
-      this.currency = "4";
-      this.currencyLable = "&#8355";
+    if (value === StoreConstants.SortigByCurrencyChf) {
+      this.currency = StoreConstants.ChfNumber;
+      this.currencyLable = StoreConstants.ChfLable;
       this.getFiltratedEditions()
     }
 
-    if (value === "JPY") {
-      this.currency = "5";
-      this.currencyLable = "&yen;";
+    if (value === StoreConstants.SortigByCurrencyJpy) {
+      this.currency = StoreConstants.JpyNumber;
+      this.currencyLable = StoreConstants.JpyLable;
       this.getFiltratedEditions()
     }
 
-    if (value === "UAH") {
-      this.currency = "6";
-      this.currencyLable = "&#8372;";
+    if (value === StoreConstants.SortigByCurrencyUah) {
+      this.currency = StoreConstants.UahNumber;
+      this.currencyLable = StoreConstants.UahLable;
       this.getFiltratedEditions()
     }
 

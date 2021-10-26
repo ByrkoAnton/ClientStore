@@ -1,37 +1,38 @@
+import { ActionConstants } from 'src/app/app-constants';
 import { ForgotPasswordModel } from 'src/app/Models/account/forgot-password-model';
 import { SignUpModel } from 'src/app/Models/account/sign-up-model';
 import { TokenModel } from 'src/app/Models/account/token-model';
 import {SignInModel} from '../../Models/account/sign-in-model'
 
 export class SignIn {
-  static readonly type = '[Auth] SignIn';
+  static readonly type = ActionConstants.AuthSignIn;
 
   constructor(public payload: SignInModel) {}
 }
 
 export class ForgotPassword {
-  static readonly type = '[Auth] ForgotPassword';
+  static readonly type = ActionConstants.AuthForgotPassword;
 
   constructor(public payload: ForgotPasswordModel) {}
 }
 
 export class SignUp {
-  static readonly type = '[Auth] SignUp';
+  static readonly type = ActionConstants.AuthSignUp;
 
   constructor(public payload: SignUpModel) {}
 }
 
 export class RestoreTokens {
-  static readonly type = '[Auth] RestoreTokens';
+  static readonly type = ActionConstants.AuthRestoreTokens;
   constructor(public payload: TokenModel) {}
 }
 
 export class SignOut {
-  static readonly type = '[Auth] SignOut';
+  static readonly type = ActionConstants.AuthSignOut;
   constructor() {}
 }
 
 export class UpdateTokens {
-  static readonly type = '[Auth] UpdateTokens';
+  static readonly type = ActionConstants.AuthUpdateTokens;
   constructor(public payload: TokenModel) {}
 }

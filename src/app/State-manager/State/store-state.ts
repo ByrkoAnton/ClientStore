@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { State, Selector, StateContext, Action } from '@ngxs/store';
 import { catchError, tap } from 'rxjs/operators';
+import { StateConstants } from 'src/app/app-constants';
 import { EditionModel } from 'src/app/Models/edition/edition-models';
 import { StoreModel } from 'src/app/Models/store/store-model';
 import { AlertService } from 'src/app/services/alert/alert.service';
@@ -9,13 +10,12 @@ import { GetFiltratedEditions} from '../action/store-action';
 
 
 @State<StoreModel>({
-    name: 'Store',
+    name: StateConstants.StoreStateName,
     defaults:{
       models:null,
       pageModel:null,
-      sliderCeil:0,
-      sliderFloor:0
-
+      sliderCeil:StateConstants.StoreDefaultSliderCeil,
+      sliderFloor:StateConstants.StoreDefaultSliderFloor
     }
   })
 

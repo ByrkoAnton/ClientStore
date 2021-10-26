@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { SweetAlertConstants, TechnicalConstants } from 'src/app/app-constants';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -8,11 +9,11 @@ export class AlertService {
 
   constructor() { }
 
-  showSuccesMessage(_title: string, _text: string)
+  showSuccesMessage(_title: string, _text: string = TechnicalConstants.EmptyString)
   {
     Swal.fire({
-      icon: 'success',
-      confirmButtonColor:"#378f7b",
+      icon: SweetAlertConstants.IconSuccess,
+      confirmButtonColor:SweetAlertConstants.ConfirmButtonColorGreen,
       title:_title,
       text: _text 
     });
@@ -21,9 +22,9 @@ export class AlertService {
   showErrorMessage(_title: string)
   {
   Swal.fire({
-    icon: 'error',
+    icon: SweetAlertConstants.IconError,
     title: _title,
-    confirmButtonColor: '#378f7b'
+    confirmButtonColor: SweetAlertConstants.ConfirmButtonColorGreen
   });
   }
 

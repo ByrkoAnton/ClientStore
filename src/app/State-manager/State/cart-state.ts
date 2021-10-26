@@ -1,14 +1,15 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
+import { StateConstants } from "src/app/app-constants";
 import { CartModel, EditionInCartModel, ItemsInCartCount } from "src/app/Models/cart/cart-model";
 import { ClearCart, StoreCart, StoreItemsInCartCount } from "../action/cart-action";
 
 
 @State<EditionInCartModel>({
-    name: 'Cart',
+    name: StateConstants.CartSatateName,
     defaults: {
       edition: null,
-      editionQty:0
+      editionQty: StateConstants.CartDefaultEditionQty
       }
 })
 

@@ -12,6 +12,7 @@ import { CartComponent } from '../cart/cart.component';
 import { EventEmitterService } from 'src/app/services/event-emitter/event-emitter.service';
 import { PaymentState } from 'src/app/State-manager/state/payment-state';
 import { AlertService } from 'src/app/services/alert/alert.service';
+import { ActiveModalConstants, PaymentResultConstants, StripeCardOptionsConstants, StripeElementsOptionsConstants, SweetAlertConstants } from 'src/app/app-constants';
 
 @Component({
   selector: 'app-payment',
@@ -28,27 +29,27 @@ export class PaymentComponent implements OnInit {
   editionsForPay: EditionForPayModel[] = [];
 
   cardOptions: StripeCardElementOptions = {
-    iconStyle: 'solid',
+    iconStyle: StripeCardOptionsConstants.IconStyleSolid,
     style: {
       base: {
-        iconColor: '#666EE8',
-        color: '#31325F',
-        fontWeight: 300,
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSize: '18px',
+        iconColor: StripeCardOptionsConstants.BaseIcionColorSoftBlue,
+        color: StripeCardOptionsConstants.ColorDarkBlue,
+        fontWeight: StripeCardOptionsConstants.FontWeight300,
+        fontFamily: StripeCardOptionsConstants.FontFamily,
+        fontSize: StripeCardOptionsConstants.FontSize,
         '::placeholder': {
-          color: '#CFD7E0'
+          color: StripeCardOptionsConstants.CollorGray,
         }
       },
       invalid: {
-        iconColor: '#ffc7ee',
-        color: '#ffc7ee'
+        iconColor: StripeCardOptionsConstants.InvalidIcionColorPink,
+        color: StripeCardOptionsConstants.ColorPink
       }
     }
   };
 
   elementsOptions: StripeElementsOptions = {
-    locale: 'en'
+    locale: StripeElementsOptionsConstants.LocaleEn
   };
 
   stripeForm!: FormGroup;
@@ -65,7 +66,7 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit(): void {
     this.stripeForm! = this.fb.group({
-      name: ['', [Validators.required]]
+      name: [String, [Validators.required]]
     });
 
     this.store.select(CartState.getCart).subscribe(result => {
@@ -100,7 +101,7 @@ export class PaymentComponent implements OnInit {
         }
 
         if (result.token) {
-          this.activeModal.dismiss('Cross click')
+          this.activeModal.dismiss(ActiveModalConstants.DismissCrossClick)
           this.store.dispatch(
             new Pay(
               {
@@ -116,9 +117,9 @@ export class PaymentComponent implements OnInit {
 
   showPaymentResult(_title: string, _text: string) {
     Swal.fire({
-      icon: 'success',
-      confirmButtonColor:"#378f7b",
-      title:"Order number: "+_title,
+      icon: SweetAlertConstants.IconSuccess,
+      confirmButtonColor:SweetAlertConstants.ConfirmButtonColorGreen,
+      title:PaymentResultConstants.OrderNumberMsg +_title,
       text: _text  
     }).then(()=>{
       this.eventEmitterService.clearCart()

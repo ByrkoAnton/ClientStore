@@ -6,10 +6,9 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
-import { TokenModel } from '../Models/account/token-model';
 import { AuthState } from '../State-manager/state/auth-state';
+import { InterseptorsConstants } from '../app-constants';
 
 @Injectable()
 export class AuthInterceptorInterceptor implements HttpInterceptor {
@@ -19,7 +18,7 @@ export class AuthInterceptorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     request = request.clone({
       setHeaders: {
-        Authorization: `Bearer ${this.store.selectSnapshot(AuthState.getToken)}`
+        Authorization: `${InterseptorsConstants.Bearer} ${this.store.selectSnapshot(AuthState.getToken)}`
       }
     });
     return next.handle(request);

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngxs/store';
+import { CartConstants, RoutingConstants, SweetAlertConstants, TechnicalConstants } from 'src/app/app-constants';
 import { EditionInCartModel } from 'src/app/Models/cart/cart-model';
 import { EventEmitterService } from 'src/app/services/event-emitter/event-emitter.service';
 import { ClearCart, StoreCart, StoreItemsInCartCount } from 'src/app/State-manager/action/cart-action';
@@ -19,6 +20,7 @@ export class CartComponent implements OnInit {
   @Input() src: any;
 
   cart: EditionInCartModel[] = {} as EditionInCartModel[];
+  signInRoute = RoutingConstants.SignIn;
 
   isAuthenticated!: boolean;
   auth = this.store.select(AuthState.isAuthenticated).subscribe(res => {
@@ -28,8 +30,8 @@ export class CartComponent implements OnInit {
   totalPrice!:number;
 
   isCartEmpty!: boolean;
-  res =this.store.select(CartState.getItemsInCartCount).subscribe(res => {
-  this.isCartEmpty! = res === 0;
+  result = this.store.select(CartState.getItemsInCartCount).subscribe(res => {
+  this.isCartEmpty! = res === CartConstants.EmptyCart;
   });
 
   itemsInCartCount$ = this.store.select(CartState.getItemsInCartCount);
@@ -40,7 +42,7 @@ export class CartComponent implements OnInit {
      public modalService: NgbModal, private eventEmitterService: EventEmitterService) { }
 
   ngOnInit(): void {
-    this.cart = JSON.parse(localStorage.getItem('userCart')!)
+    this.cart = JSON.parse(localStorage.getItem(TechnicalConstants.UserCart)!)
     if (this.cart !== undefined) {
       this.store.dispatch(new StoreCart({
         editionsAndQty: this.cart
@@ -72,29 +74,29 @@ export class CartComponent implements OnInit {
 
   delete(editionId: number | null)
   {
-      this.changeCart(0, editionId);
+      this.changeCart(CartConstants.EmptyCart, editionId);
   }
 
   changeCart(editionQty: number|null, editionId: number | null ) {
-    var cart: EditionInCartModel[] = JSON.parse(localStorage.getItem('userCart')!);
+    var cart: EditionInCartModel[] = JSON.parse(localStorage.getItem(TechnicalConstants.UserCart)!);
     var positionInCart = cart.findIndex(({ edition }) => edition?.id === editionId);
-    var countItemsInCart:number = JSON.parse(localStorage.getItem('cartItemsCount')!);
+    var countItemsInCart:number = JSON.parse(localStorage.getItem(TechnicalConstants.CartItemsCount)!);
     var updatedCountItemsInCart = countItemsInCart - cart[positionInCart].editionQty! + editionQty!;
 
-    if (editionQty === 0) {
+    if (editionQty === TechnicalConstants.NumberDefault) {
       Swal.fire({
-        title: 'Are you sure?',
-        text: "You will remove all " + cart[positionInCart].edition?.title + " from cart",
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#378f7b',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, remove it!'
+        title: CartConstants.DialogDelTitle,
+        text: CartConstants.DialogDelTextPaart1 + cart[positionInCart].edition?.title + CartConstants.DialogDelTextPaart2,
+        icon: SweetAlertConstants.IconQuestion,
+        showCancelButton: SweetAlertConstants.ShowCancelButtonTrue,
+        confirmButtonColor: SweetAlertConstants.ConfirmButtonColorGreen,
+        cancelButtonColor: SweetAlertConstants.CancelButtonColorRed,
+        confirmButtonText: CartConstants.DialogDelConfirmText
       }).then((result) => {
         if (result.isConfirmed) {
           cart.splice(positionInCart, 1);
-          localStorage.setItem('userCart', JSON.stringify(cart));
-          localStorage.setItem('cartItemsCount',JSON.stringify(updatedCountItemsInCart))
+          localStorage.setItem(TechnicalConstants.UserCart, JSON.stringify(cart));
+          localStorage.setItem(TechnicalConstants.CartItemsCount, JSON.stringify(updatedCountItemsInCart))
           this.store.dispatch(new StoreCart({
             editionsAndQty: cart
           }))
@@ -107,8 +109,8 @@ export class CartComponent implements OnInit {
     }
 
     cart[positionInCart].editionQty = editionQty;
-    localStorage.setItem('userCart', JSON.stringify(cart));
-      localStorage.setItem("cartItemsCount",JSON.stringify(updatedCountItemsInCart))
+    localStorage.setItem(TechnicalConstants.UserCart, JSON.stringify(cart));
+      localStorage.setItem(TechnicalConstants.CartItemsCount, JSON.stringify(updatedCountItemsInCart))
       this.store.dispatch(new StoreCart({
         editionsAndQty: cart
       }))
@@ -119,8 +121,8 @@ export class CartComponent implements OnInit {
 
   clearCart()
   {
-    localStorage.removeItem('userCart');
-    localStorage.removeItem("cartItemsCount")
+    localStorage.removeItem(TechnicalConstants.UserCart);
+    localStorage.removeItem(TechnicalConstants.CartItemsCount);
     this.store.dispatch(new ClearCart)
     location.reload();
   }

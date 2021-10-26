@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { StoreServiceConstants, UserServiceConstants } from 'src/app/app-constants';
 import { UserModel } from 'src/app/Models/user/user-model';
 
 @Injectable({
@@ -11,15 +12,15 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUser(): Observable<UserModel> {
-    return this.http.get<UserModel>('https://localhost:5001/api/User/GetUserById');
+    return this.http.get<UserModel>(UserServiceConstants.GetUserByIdControlerRoute);
   }
 
   updateUser(model: UserModel): Observable<UserModel> {
-    return this.http.post<UserModel>('https://localhost:5001/api/User/UserUpdate', model);
+    return this.http.post<UserModel>(UserServiceConstants.UserUpdateControlerRoute, model);
   }
 
   changePassword(model: UserModel): Observable<UserModel> {
     debugger
-    return this.http.post<UserModel>('https://localhost:5001/api/User/ChangePassword', model);
+    return this.http.post<UserModel>(UserServiceConstants.ChangePasswordControlerRoute, model);
   }
 }

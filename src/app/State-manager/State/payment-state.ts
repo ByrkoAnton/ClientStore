@@ -1,13 +1,14 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { catchError, tap } from "rxjs/operators";
+import { StateConstants } from "src/app/app-constants";
 import { PaymentModel, ResultPayModel } from "src/app/Models/payment/payment-model";
 import { AlertService } from "src/app/services/alert/alert.service";
 import { PaymentService } from "src/app/services/payment/payment.service";
 import { Pay } from "../action/payment-action";
 
 @State<ResultPayModel>({
-    name: 'OrderDetails',
+    name: StateConstants.PaymentStateName,
     defaults:{
         message:null,
         orderId:null

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthServiceConstants } from 'src/app/app-constants';
 import { ForgotPasswordModel } from 'src/app/Models/account/forgot-password-model';
 import { SignInModel } from 'src/app/Models/account/sign-in-model';
 import { SignUpModel } from 'src/app/Models/account/sign-up-model';
@@ -17,19 +18,19 @@ export class AuthenticationService {
   tokenModel: TokenModel = {} as TokenModel;
 
   signIn(model:SignInModel): Observable<TokenModel> {
-    return this.http.post<TokenModel>('https://localhost:5001/api/Account/signIn', model); 
+    return this.http.post<TokenModel>(AuthServiceConstants.SignInControlerRoute, model); 
   } 
 
   signUp(model: SignUpModel) {
-    return this.http.post('https://localhost:5001/api/Account/signUp', model);
+    return this.http.post(AuthServiceConstants.SignUpControlerRoute, model);
     }
 
   forgotPassword(model:ForgotPasswordModel){
-    return this.http.post('https://localhost:5001/api/User/ForgotPassword', model); 
+    return this.http.post(AuthServiceConstants.ForgotPasswordControlerRoute, model); 
     } 
 
     updateTokens(model:TokenModel): Observable<TokenModel> {
-      return this.http.post<TokenModel>('https://localhost:5001/api/Account/updateTokens', model); 
+      return this.http.post<TokenModel>(AuthServiceConstants.UpdateTokensControlerRoute, model); 
     } 
 
     

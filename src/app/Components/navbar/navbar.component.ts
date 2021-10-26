@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngxs/store';
-import { RoutingConstants } from 'src/app/app-constants';
+import { CartConstants, RoutingConstants, TechnicalConstants } from 'src/app/app-constants';
 import { SignOut } from 'src/app/State-manager/action/auth-action';
 import { StoreItemsInCartCount } from 'src/app/State-manager/action/cart-action';
 import { AuthState } from 'src/app/State-manager/state/auth-state';
@@ -28,8 +28,8 @@ export class NavbarComponent implements OnInit {
   isCartEmpty!:boolean;
   isCartFull!:boolean;
   cart = this.store.select(CartState.getItemsInCartCount).subscribe(res =>{
-    this.isCartEmpty = res === 0;
-    this.isCartFull = res! > 99
+    this.isCartEmpty = res === CartConstants.EmptyCart;
+    this.isCartFull = res! > CartConstants.FullCart;
   });
 
 
@@ -48,7 +48,7 @@ export class NavbarComponent implements OnInit {
   }
 
   restoreCountItemsInCart():void{ 
-    var count:number = + localStorage.getItem('cartItemsCount')!;
+    var count:number = + localStorage.getItem(TechnicalConstants.CartItemsCount)!;
       this.store.dispatch(new StoreItemsInCartCount({
         itemsInCartCount:count
       }))
