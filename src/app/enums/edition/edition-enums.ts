@@ -15,3 +15,13 @@ export enum Currency {
     JPY = 5,
     UAH = 6
 }
+
+export enum CurrencyLable {
+    "None" = 0,
+    "$" = 1 ,
+    "&euro;" = 2 ,
+    "&pound;" = 3,
+    "&#8355" = 4,
+    "&yen;" = 5,
+    "&#8372;" = 6
+}

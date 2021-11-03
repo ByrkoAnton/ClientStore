@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { StoreServiceConstants, UserServiceConstants } from 'src/app/app-constants';
+import { UserServiceConstants } from 'src/app/app-constants';
 import { UserModel } from 'src/app/Models/user/user-model';
 
 @Injectable({

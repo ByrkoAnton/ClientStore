@@ -9,7 +9,7 @@ import { EditionProfileComponent } from './components/edition-profile/edition-pr
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { StoreComponent } from './components/store/store.component';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
-import { AuthGuard } from './Guards/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { RoutingConstants } from './app-constants';
 
 const routes: Routes = [

@@ -117,6 +117,7 @@ export class TechnicalConstants{
     public static FirstNameMinLenghts: number = 2;
     public static LastNameMinLenghts: number = 2;
     public static EmptyString: string = "";
+    public static StringSpace: string = " ";
 }
 
 export class CartConstants{
@@ -192,14 +193,14 @@ export class StoreConstants{
     public static DefaultSliderFloorForGetMethod: number = 0;
     public static DefaultSliderCeilForGetMethod: number = 0;
     public static DelOneElement: number = 1;
-    public static SortigByPriceAsc: string = "price asc";
-    public static SortigByPriceDes: string = "price des";
-    public static SortigByTitleAsc: string = "title asc";
-    public static SortigByTitleDes: string = "title des";
-
-    public static SortingParamsPrice: string = "price";
     public static SortingParamsTitle: string = "title";
+    public static SortingParamsPrice: string = "price";
+    public static SortingAsc: string = "asc";
 
+    public static SortingDirectionPosition: number = 1;
+    public static SortingPropertyPosition: number = 0;
+
+    
     public static SortigByCurrencyUsd: string = "USD";
     public static UsdNumber: string = "1";
     public static UsdLable: string = "$";

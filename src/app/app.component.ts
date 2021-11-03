@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
+import { TechnicalConstants } from './app-constants';
 import { RestoreTokens as RestoreTokens } from './State-manager/action/auth-action';
 
 @Component({
@@ -18,8 +19,8 @@ export class AppComponent {
     } 
 
   restoreTokens():void{ 
-    let accessToken = localStorage.getItem('accessToken');
-    let refreshToken = localStorage.getItem('refreshToken');
+    let accessToken = localStorage.getItem(TechnicalConstants.AccessToken);
+    let refreshToken = localStorage.getItem(TechnicalConstants.RefreshToken);
     if(accessToken !== null){
       this.store.dispatch(new RestoreTokens({accessToken: accessToken,
        refreshToken: refreshToken}))

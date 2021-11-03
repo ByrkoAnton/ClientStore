@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { AuthState } from './State-manager/state/auth-state';
-import { AuthGuard } from './Guards/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { AccountModule } from './modules/account/account.module';
 import { AuthInterceptorInterceptor } from './interceptors/auth-interceptor.interceptor';
 import { UserState } from './State-manager/state/user-state';

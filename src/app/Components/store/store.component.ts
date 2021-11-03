@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { RoutingConstants, StoreConstants } from 'src/app/app-constants';
+import { RoutingConstants, StoreConstants, TechnicalConstants } from 'src/app/app-constants';
+import { Currency, CurrencyLable } from 'src/app/enums/edition/edition-enums';
+import { SortingByPriceOrTitleParams } from 'src/app/enums/sorting-enums';
 import { EventEmitterService } from 'src/app/services/event-emitter/event-emitter.service';
 import { SignOut } from 'src/app/State-manager/action/auth-action';
 import { StoreCurrentEditonId } from 'src/app/State-manager/action/edition-action';
@@ -20,7 +22,7 @@ import { StoreState } from 'src/app/State-manager/state/store-state';
 })
 
 export class StoreComponent implements OnInit {
-  editionProfileRote=RoutingConstants.EditionProfile;
+  editionProfileRote = RoutingConstants.EditionProfile;
   userQuestionUpdate = new Subject<string>();
   isAuthenticated!: boolean;
   auth = this.store.select(AuthState.isAuthenticated).subscribe(res => {
@@ -37,6 +39,9 @@ export class StoreComponent implements OnInit {
   currency: string = StoreConstants.DefaultCurrency;
   currencyLable: string = StoreConstants.DefaultCurrencyLable;
   editionTypes: string[] = StoreConstants.DefaultEditionsType;
+  currencys = Currency;
+  sortByPriceOrTitle = SortingByPriceOrTitleParams;
+  currencysLables = CurrencyLable;
 
   sliderFloor: number | undefined;
   sliderCeil: number | undefined;
@@ -51,6 +56,8 @@ export class StoreComponent implements OnInit {
   inputValueForQuery: number = StoreConstants.DefaultInputValueForQuery;
   inputHighValueForQuery: number = StoreConstants.DefaultInputHighValueForQuery;
 
+  useDefaultSortingParams: boolean = true;
+
   options: Options = {
     floor: StoreConstants.DefaultSliderFloor,
     ceil: StoreConstants.DefaultSliderCeil,
@@ -60,7 +67,7 @@ export class StoreComponent implements OnInit {
 
   };
 
-  constructor(private store: Store, private router: Router, 
+  constructor(private store: Store, private router: Router,
     private eventEmitterService: EventEmitterService) {
     this.userQuestionUpdate.pipe(
       debounceTime(StoreConstants.OneSecond),
@@ -87,8 +94,8 @@ export class StoreComponent implements OnInit {
       }
     })
 
-    if(this.eventEmitterService.subsVar == null ) {
-      this.eventEmitterService.subsVar = this.eventEmitterService.invokeSignOut.subscribe(()=>{
+    if (this.eventEmitterService.subsVar == null) {
+      this.eventEmitterService.subsVar = this.eventEmitterService.invokeSignOut.subscribe(() => {
         this.signOut();
       });
     }
@@ -148,6 +155,7 @@ export class StoreComponent implements OnInit {
       this.inputValueForQuery = this.sliderValueForQuery;
       this.inputHighValueForQuery = this.sliderHighValueForQuery;
       this.showDefaultSlider = false;
+      this.useDefaultSortingParams = false;
     }
   }
 
@@ -210,73 +218,29 @@ export class StoreComponent implements OnInit {
   }
 
   sortChange($event: any) {
+
     var value = $event.target.value;
-    if (value === StoreConstants.SortigByPriceAsc) {
-      this.isAscending = true;
-      this.propertyForSort = StoreConstants.SortingParamsPrice;
+    var splitedValue = value.split(TechnicalConstants.StringSpace)
+    this.isAscending = splitedValue[StoreConstants.SortingDirectionPosition] === StoreConstants.SortingAsc ? true : false;
+    this.propertyForSort = splitedValue[StoreConstants.SortingPropertyPosition];
+
+    if (this.useDefaultSortingParams) {
+      this.useDefaultSortingParams = false;
+      this.changeSlider();
       this.getFiltratedEditions();
       return;
     }
 
-    if (value === StoreConstants.SortigByPriceDes) {
-      this.isAscending = false;
-      this.propertyForSort = StoreConstants.SortingParamsPrice;
-      this.getFiltratedEditions();
-      return;
-    }
-
-    if (value === StoreConstants.SortigByTitleAsc) {
-      this.isAscending = true;
-      this.propertyForSort = StoreConstants.SortingParamsTitle;
-      this.getFiltratedEditions();
-      return;
-    }
-
-    if (value === StoreConstants.SortigByTitleDes) {
-      this.isAscending = false;
-      this.propertyForSort = StoreConstants.SortingParamsTitle;
-      this.getFiltratedEditions();
-      return;
-    }
+    this.getFiltratedEditions(this.inputValueForQuery, this.inputHighValueForQuery,
+      this.options.floor, this.options.ceil);
+    return;
   }
 
   currencyTypeChange($event: any) {
     var value = $event.target.value;
-    if (value === StoreConstants.SortigByCurrencyUsd) {
-      this.currency = StoreConstants.UsdNumber;
-      this.currencyLable = StoreConstants.UsdLable
-      this.getFiltratedEditions()
-    }
-
-    if (value === StoreConstants.SortigByCurrencyEur) {
-      this.currency = StoreConstants.EurNumber;
-      this.currencyLable = StoreConstants.EurLable;
-      this.getFiltratedEditions()
-    }
-
-    if (value === StoreConstants.SortigByCurrencyGbp) {
-      this.currency = StoreConstants.GbpNumber;
-      this.currencyLable = StoreConstants.GbpLable;
-      this.getFiltratedEditions()
-    }
-
-    if (value === StoreConstants.SortigByCurrencyChf) {
-      this.currency = StoreConstants.ChfNumber;
-      this.currencyLable = StoreConstants.ChfLable;
-      this.getFiltratedEditions()
-    }
-
-    if (value === StoreConstants.SortigByCurrencyJpy) {
-      this.currency = StoreConstants.JpyNumber;
-      this.currencyLable = StoreConstants.JpyLable;
-      this.getFiltratedEditions()
-    }
-
-    if (value === StoreConstants.SortigByCurrencyUah) {
-      this.currency = StoreConstants.UahNumber;
-      this.currencyLable = StoreConstants.UahLable;
-      this.getFiltratedEditions()
-    }
+    this.currency = value
+    this.currencyLable = this.currencysLables[value]
+    this.getFiltratedEditions()
 
     this.showDefaultSlider = true;
     this.setSliderDefaultParams(this.options.floor!, this.options.ceil!);

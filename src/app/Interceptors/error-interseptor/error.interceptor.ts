@@ -10,7 +10,7 @@ import { catchError, mergeMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { SignOut, UpdateTokens } from 'src/app/State-manager/action/auth-action';
-import { InterseptorsConstants, RoutingConstants, TechnicalConstants } from 'src/app/app-constants';
+import { InterseptorsConstants, RoutingConstants } from 'src/app/app-constants';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {

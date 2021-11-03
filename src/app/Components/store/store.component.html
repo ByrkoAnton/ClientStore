@@ -4,21 +4,21 @@
             placeholder="Search by title" aria-label="Search" (ngModelChange)="this.userQuestionUpdate.next($event)">
         <a class="filtr">Sort by: </a>
         <select class="sortSelect" (change)="sortChange($event)">
-            <a>Sort by: <br></a>
-            <option value="price asc" selected>Price low to hight</option>
-            <option value="price des">Price hight to low</option>
-            <option value="title asc">Title A-Z</option>
-            <option value="title des">Title Z-A</option>
+            <option value={{sortByPriceOrTitle.PriceAsc}} selected>Price low to hight</option>
+            <option value={{sortByPriceOrTitle.PriceDes}}>Price hight to low</option>
+            <option value={{sortByPriceOrTitle.TitleAsc}}>Title A-Z</option>
+            <option value={{sortByPriceOrTitle.TitleDes}}>Title Z-A</option>
         </select>
+       
         <a class="filtr">Currency: </a>
         <select class="sortSelect" (change)="currencyTypeChange($event)">
-            <a>Sort by <br></a>
-            <option value="USD" selected>USD</option>
-            <option value="EUR">EUR</option>
-            <option value="GBP">GBP</option>
-            <option value="CHF">CHF</option>
-            <option value="JPY">JPY</option>
-            <option value="UAH">UAH</option>
+    
+            <option value={{currencys.USD}} selected>{{currencys[1]}}</option>
+            <option value={{currencys.EUR}}>{{currencys[2]}}</option>
+            <option value={{currencys.GBP}}>{{currencys[3]}}</option>
+            <option value={{currencys.CHF}}>{{currencys[4]}}</option>
+            <option value={{currencys.JPY}}>{{currencys[5]}}</option>
+            <option value={{currencys.UAH}}>{{currencys[6]}}</option>
         </select>
         <fieldset class="sortSelect">
             <legend>Categories:</legend>
