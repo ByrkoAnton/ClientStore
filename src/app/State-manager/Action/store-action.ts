@@ -1,5 +1,5 @@
 import { ActionConstants } from "src/app/app-constants";
-import { CurrentEditonIdModel, EditionRequestModel } from "src/app/Models/edition/edition-models";
+import { CurrentEditonIdModel, EditionRequestModel } from "src/app/models/edition/edition-models";
 
 export class GetFiltratedEditions {
     static readonly type = ActionConstants.StoreGetEditions;

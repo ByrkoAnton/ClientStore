@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { CartConstants, EditionProfileConstants, TechnicalConstants } from 'src/app/app-constants';
-import { EditionInCartModel} from 'src/app/Models/cart/cart-model';
-import { EditionModel } from 'src/app/Models/edition/edition-models';
+import { EditionInCartModel} from 'src/app/models/cart/cart-model';
+import { EditionModel } from 'src/app/models/edition/edition-models';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { EventEmitterService } from 'src/app/services/event-emitter/event-emitter.service';
-import { StoreItemsInCartCount } from 'src/app/State-manager/action/cart-action';
-import { GetEdition } from 'src/app/State-manager/action/edition-action';
-import { EditonState as EditionState } from 'src/app/State-manager/state/edition-state';
+import { StoreItemsInCartCount } from 'src/app/state-manager/action/cart-action';
+import { GetEdition } from 'src/app/state-manager/action/edition-action';
+import { EditonState as EditionState } from 'src/app/state-manager/state/edition-state';
 
 @Component({
   selector: 'app-edition-profile',

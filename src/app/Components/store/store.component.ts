@@ -7,12 +7,12 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { RoutingConstants, StoreConstants, TechnicalConstants } from 'src/app/app-constants';
 import { Currency, CurrencyLable } from 'src/app/enums/edition/edition-enums';
 import { SortingByPriceOrTitleParams } from 'src/app/enums/sorting-enums';
-import { EventEmitterService } from 'src/app/services/event-emitter/event-emitter.service';
-import { SignOut } from 'src/app/State-manager/action/auth-action';
-import { StoreCurrentEditonId } from 'src/app/State-manager/action/edition-action';
-import { GetFiltratedEditions } from 'src/app/State-manager/action/store-action';
-import { AuthState } from 'src/app/State-manager/state/auth-state';
-import { StoreState } from 'src/app/State-manager/state/store-state';
+import { StoreCurrentEditonId } from '../../state-manager/action/edition-action';
+import { GetFiltratedEditions } from 'src/app/state-manager/action/store-action';
+
+import { AuthState } from 'src/app/state-manager/state/auth-state';
+import { StoreState } from 'src/app/state-manager/state/store-state';
+
 
 
 @Component({
@@ -67,7 +67,7 @@ export class StoreComponent implements OnInit {
 
   };
 
-  constructor(private store: Store, private router: Router) {}
+  constructor(private store: Store, private router: Router) { }
 
   ngOnInit(): void {
     this.userQuestionUpdate.pipe(
@@ -198,7 +198,7 @@ export class StoreComponent implements OnInit {
     }
 
     if (!isChecked) {
-      this.editionTypes = this.editionTypes.filter(element=> element !== value);
+      this.editionTypes = this.editionTypes.filter(element => element !== value);
     }
     this.getFiltratedEditions();
     this.showDefaultSlider = true;
@@ -209,7 +209,7 @@ export class StoreComponent implements OnInit {
 
     var value = $event.target.value;
     var splitedValue = value.split(TechnicalConstants.StringSpace)
-    this.isAscending = splitedValue[StoreConstants.SortingDirectionPosition] === StoreConstants.SortingAsc ? true : false;
+    this.isAscending = splitedValue[StoreConstants.SortingDirectionPosition] === StoreConstants.SortingAsc;
     this.propertyForSort = splitedValue[StoreConstants.SortingPropertyPosition];
 
     if (this.useDefaultSortingParams) {

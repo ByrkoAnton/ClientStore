@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { ErrorConstants, RoutingConstants, TechnicalConstants } from 'src/app/app-constants';
-import {SignInModel} from '../../../Models/account/sign-in-model';
+import {SignInModel} from '../../../models/account/sign-in-model';
 
-import { SignIn } from '../../../State-manager/action/auth-action';
+import { SignIn } from '../../../state-manager/action/auth-action';
 
 
 @Component({

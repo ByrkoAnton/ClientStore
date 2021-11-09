@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngxs/store';
 import { CartConstants, RoutingConstants, TechnicalConstants } from 'src/app/app-constants';
-import { SignOut } from 'src/app/State-manager/action/auth-action';
-import { StoreItemsInCartCount } from 'src/app/State-manager/action/cart-action';
-import { AuthState } from 'src/app/State-manager/state/auth-state';
-import { CartState } from 'src/app/State-manager/state/cart-state';
+import { SignOut } from 'src/app/state-manager/action/auth-action';
+import { StoreItemsInCartCount } from 'src/app/state-manager/action/cart-action';
+import { AuthState } from 'src/app/state-manager/state/auth-state';
+import { CartState } from 'src/app/state-manager/state/cart-state';
 import { CartComponent } from '../cart/cart.component';
 
 

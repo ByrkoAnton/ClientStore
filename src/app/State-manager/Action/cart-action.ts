@@ -1,5 +1,5 @@
 import { ActionConstants } from "src/app/app-constants";
-import { CartModel, ItemsInCartCount } from "src/app/Models/cart/cart-model";
+import { CartModel, ItemsInCartCount } from "src/app/models/cart/cart-model";
 
 export class StoreItemsInCartCount {
     static readonly type = ActionConstants.CartItemsInCartCount;

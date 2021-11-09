@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { ErrorConstants, RegExpConstants, TechnicalConstants, UserProfileConstants } from 'src/app/app-constants';
-import { ChangePassword, GetUser, UpdateUser } from 'src/app/State-manager/action/user-acton';
-import { UserState } from 'src/app/State-manager/state/user-state';
+import { ChangePassword, GetUser, UpdateUser } from 'src/app/state-manager/action/user-acton';
+import { UserState } from 'src/app/state-manager/state/user-state';
 
 @Component({
   selector: 'app-user-profile',

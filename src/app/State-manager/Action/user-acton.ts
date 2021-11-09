@@ -1,6 +1,6 @@
 import { ActionConstants } from "src/app/app-constants";
-import { ChangePasswordModel } from "src/app/Models/user/change-password-model";
-import {UserModel } from "src/app/Models/user/user-model";
+import { ChangePasswordModel } from "src/app/models/user/change-password-model";
+import {UserModel } from "src/app/models/user/user-model";
 
 export class GetUser {
     static readonly type = ActionConstants.UserGet;

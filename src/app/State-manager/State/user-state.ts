@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { catchError, tap } from "rxjs/operators";
 import { StateConstants } from "src/app/app-constants";
-import { UserModel } from "src/app/Models/user/user-model";
+import { UserModel } from "src/app/models/user/user-model";
 import { AlertService } from "src/app/services/alert/alert.service";
 import { UserService } from "src/app/services/user/user.service";
 import { ChangePassword, GetUser, UpdateUser } from "../action/user-acton";

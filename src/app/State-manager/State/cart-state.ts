@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { StateConstants } from "src/app/app-constants";
-import { CartModel, EditionInCartModel, ItemsInCartCount } from "src/app/Models/cart/cart-model";
+import { CartModel, EditionInCartModel, ItemsInCartCount } from "src/app/models/cart/cart-model";
 import { ClearCart, StoreCart, StoreItemsInCartCount } from "../action/cart-action";
 
 

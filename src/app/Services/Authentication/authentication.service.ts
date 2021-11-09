@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthServiceConstants } from 'src/app/app-constants';
-import { ForgotPasswordModel } from 'src/app/Models/account/forgot-password-model';
-import { SignInModel } from 'src/app/Models/account/sign-in-model';
-import { SignUpModel } from 'src/app/Models/account/sign-up-model';
-import { TokenModel } from 'src/app/Models/account/token-model';
+import { ForgotPasswordModel } from 'src/app/models/account/forgot-password-model';
+import { SignInModel } from 'src/app/models/account/sign-in-model';
+import { SignUpModel } from 'src/app/models/account/sign-up-model';
+import { TokenModel } from 'src/app/models/account/token-model';
 
 @Injectable({
   providedIn: 'root'

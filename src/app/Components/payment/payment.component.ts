@@ -4,13 +4,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
 import { StripeCardElementOptions, StripeElementsOptions } from '@stripe/stripe-js';
 import { Store } from '@ngxs/store';
-import { CartState } from 'src/app/State-manager/state/cart-state';
+import { CartState } from 'src/app/state-manager/state/cart-state';
 import Swal from 'sweetalert2';
-import { Pay } from 'src/app/State-manager/action/payment-action';
-import { EditionForPayModel } from 'src/app/Models/edition/edition-models';
+import { Pay } from 'src/app/state-manager/action/payment-action';
+import { EditionForPayModel } from 'src/app/models/edition/edition-models';
 import { CartComponent } from '../cart/cart.component';
 import { EventEmitterService } from 'src/app/services/event-emitter/event-emitter.service';
-import { PaymentState } from 'src/app/State-manager/state/payment-state';
+import { PaymentState } from 'src/app/state-manager/state/payment-state';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { ActiveModalConstants, PaymentResultConstants, StripeCardOptionsConstants, StripeElementsOptionsConstants, SweetAlertConstants } from 'src/app/app-constants';
 

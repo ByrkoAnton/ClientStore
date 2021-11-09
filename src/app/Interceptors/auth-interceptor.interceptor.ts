@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
-import { AuthState } from '../State-manager/state/auth-state';
+import { AuthState } from '../state-manager/state/auth-state';
 import { InterseptorsConstants } from '../app-constants';
 
 @Injectable()

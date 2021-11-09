@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngxs/store';
 import { CartConstants, RoutingConstants, SweetAlertConstants, TechnicalConstants } from 'src/app/app-constants';
-import { EditionInCartModel } from 'src/app/Models/cart/cart-model';
+import { EditionInCartModel } from 'src/app/models/cart/cart-model';
 import { EventEmitterService } from 'src/app/services/event-emitter/event-emitter.service';
-import { ClearCart, StoreCart, StoreItemsInCartCount } from 'src/app/State-manager/action/cart-action';
-import { AuthState } from 'src/app/State-manager/state/auth-state';
-import { CartState } from 'src/app/State-manager/state/cart-state';
+import { ClearCart, StoreCart, StoreItemsInCartCount } from 'src/app/state-manager/action/cart-action';
+import { AuthState } from 'src/app/state-manager/state/auth-state';
+import { CartState } from 'src/app/state-manager/state/cart-state';
 import Swal from 'sweetalert2';
 import { PaymentComponent } from '../payment/payment.component';
 

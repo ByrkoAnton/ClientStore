@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { ErrorConstants, RegExpConstants, RoutingConstants, TechnicalConstants } from 'src/app/app-constants';
-import { SignUp } from 'src/app/State-manager/action/auth-action';
+import { SignUp } from 'src/app/state-manager/action/auth-action';
 
 
 @Component({

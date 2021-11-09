@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { catchError, tap } from "rxjs/operators";
 import { StateConstants, TechnicalConstants } from "src/app/app-constants";
-import { CurrentEditonIdModel, EditionModel } from "src/app/Models/edition/edition-models";
+import { CurrentEditonIdModel, EditionModel } from "src/app/models/edition/edition-models";
 import { AlertService } from "src/app/services/alert/alert.service";
 import { EditionService } from "src/app/services/edition/edition.service";
 import { GetEdition, StoreCurrentEdition, StoreCurrentEditonId } from "../action/edition-action";

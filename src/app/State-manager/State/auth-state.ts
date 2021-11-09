@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { State, Selector, StateContext, Action } from '@ngxs/store';
 import { catchError, tap } from 'rxjs/operators';
-import { ActionConstants, RoutingConstants, StateConstants, TechnicalConstants } from 'src/app/app-constants';
+import { RoutingConstants, StateConstants, TechnicalConstants } from 'src/app/app-constants';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import { TokenModel } from '../../Models/account/token-model';
+import { TokenModel } from '../../models/account/token-model';
 import { ForgotPassword, RestoreTokens as RestoreTokens, SignIn, SignOut, SignUp, UpdateTokens } from '../action/auth-action';
 
 

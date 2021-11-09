@@ -1,8 +1,8 @@
 import { ActionConstants } from 'src/app/app-constants';
-import { ForgotPasswordModel } from 'src/app/Models/account/forgot-password-model';
-import { SignUpModel } from 'src/app/Models/account/sign-up-model';
-import { TokenModel } from 'src/app/Models/account/token-model';
-import {SignInModel} from '../../Models/account/sign-in-model'
+import { ForgotPasswordModel } from 'src/app/models/account/forgot-password-model';
+import { SignUpModel } from 'src/app/models/account/sign-up-model';
+import { TokenModel } from 'src/app/models/account/token-model';
+import {SignInModel} from '../../models/account/sign-in-model'
 
 export class SignIn {
   static readonly type = ActionConstants.AuthSignIn;

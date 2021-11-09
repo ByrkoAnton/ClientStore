@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { ErrorConstants, TechnicalConstants } from 'src/app/app-constants';
-import { ForgotPassword } from 'src/app/State-manager/action/auth-action';
+import { ForgotPassword } from 'src/app/state-manager/action/auth-action';
 
 
 @Component({

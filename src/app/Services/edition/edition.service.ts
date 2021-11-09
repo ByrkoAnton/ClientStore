@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EditionServiceConstants } from 'src/app/app-constants';
-import { CurrentEditonIdModel, EditionModel } from 'src/app/Models/edition/edition-models';
+import { CurrentEditonIdModel, EditionModel } from 'src/app/models/edition/edition-models';
 
 @Injectable({
   providedIn: 'root'

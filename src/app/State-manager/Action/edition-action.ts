@@ -1,5 +1,5 @@
 import { ActionConstants } from "src/app/app-constants";
-import { CurrentEditonIdModel, EditionModel } from "src/app/Models/edition/edition-models";
+import { CurrentEditonIdModel, EditionModel } from "src/app/models/edition/edition-models";
 
 export class GetEdition {
     static readonly type = ActionConstants.EditionGet;
