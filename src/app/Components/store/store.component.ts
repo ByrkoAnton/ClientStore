@@ -67,8 +67,9 @@ export class StoreComponent implements OnInit {
 
   };
 
-  constructor(private store: Store, private router: Router,
-    private eventEmitterService: EventEmitterService) {
+  constructor(private store: Store, private router: Router) {}
+
+  ngOnInit(): void {
     this.userQuestionUpdate.pipe(
       debounceTime(StoreConstants.OneSecond),
       distinctUntilChanged())
@@ -77,9 +78,7 @@ export class StoreComponent implements OnInit {
         this.showDefaultSlider = true;
         this.setSliderDefaultParams(this.options.floor!, this.options.ceil!);
       });
-  }
 
-  ngOnInit(): void {
     this.getFiltratedEditions();
     this.store.select(StoreState.getTotalPages).subscribe((x: number | null) => {
       this.fullCounts = x! * this.countElementOnPage
@@ -93,12 +92,6 @@ export class StoreComponent implements OnInit {
         this.setSliderDefaultParams(this.sliderFloor, this.sliderCeil);
       }
     })
-
-    if (this.eventEmitterService.subsVar == null) {
-      this.eventEmitterService.subsVar = this.eventEmitterService.invokeSignOut.subscribe(() => {
-        this.signOut();
-      });
-    }
   }
 
   setSliderDefaultParams(sliderFloor: number, sliderCeil: number) {
@@ -205,12 +198,7 @@ export class StoreComponent implements OnInit {
     }
 
     if (!isChecked) {
-      for (var i = 0; i < this.editionTypes.length; i++) {
-
-        if (this.editionTypes[i] === value) {
-          this.editionTypes.splice(i, StoreConstants.DelOneElement);
-        }
-      }
+      this.editionTypes = this.editionTypes.filter(element=> element !== value);
     }
     this.getFiltratedEditions();
     this.showDefaultSlider = true;
@@ -248,10 +236,6 @@ export class StoreComponent implements OnInit {
 
   makePagination() {
     this.getFiltratedEditions()
-  }
-
-  signOut(): void {
-    this.store.dispatch(new SignOut())
   }
 
   sroreCurrentEditionId(editionId: number | null) {

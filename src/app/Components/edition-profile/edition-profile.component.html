@@ -16,11 +16,11 @@
         </ng-container>
     </div>
     <div class class="actions">
-        <a> Qty: </a>
-        <input  class="price-input" type="number" min="1" step="1" onkeydown="return false" value="1" [(ngModel)]="editionQty">
+        <a> Quantity: </a>
+        <input  class="price-input" type="number" min="1" step="1" onkeydown="return false" value="1" [(ngModel)]="editionQuantity">
         <ng-container *ngIf="edition$ | async as edition">
             <ng-container *ngIf="edition.price !== null">
-            <a class="price">$ {{edition.price * editionQty}}</a>
+            <a class="price">$ {{edition.price * editionQuantity}}</a>
         </ng-container>
         </ng-container> 
         <br><button (click)="addToCart()">Add to cart</button>

@@ -71,7 +71,7 @@ export class PaymentComponent implements OnInit {
 
     this.store.select(CartState.getCart).subscribe(result => {
       this.total =
-        result?.reduce((accumulator, current) => accumulator + current.edition?.price! * current.editionQty!, 0)!;
+        result?.reduce((accumulator, current) => accumulator + current.edition?.price! * current.editionQuantity!, 0)!;
     })
 
     this.store.select(PaymentState.getPaymentResult).subscribe(result => {
@@ -87,7 +87,7 @@ export class PaymentComponent implements OnInit {
       result!.forEach(element => {
         var editionForPay = {} as EditionForPayModel;
         editionForPay.editionId = element.edition?.id!
-        editionForPay.count = element.editionQty!;
+        editionForPay.count = element.editionQuantity!;
         this.editionsForPay.push(editionForPay)
       });
     })

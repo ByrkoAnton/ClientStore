@@ -1,11 +1,11 @@
 import { EditionModel } from "../edition/edition-models";
 export interface EditionInCartModel {
     edition:EditionModel|null;
-    editionQty: number|null;   
+    editionQuantity: number|null;   
 }
 
 export interface CartModel {
-    editionsAndQty:EditionInCartModel[]|null;    
+    editionsAndQuantity:EditionInCartModel[]|null;    
 }
 
 export interface ItemsInCartCount {

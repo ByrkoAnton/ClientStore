@@ -45,14 +45,14 @@ export class CartComponent implements OnInit {
     this.cart = JSON.parse(localStorage.getItem(TechnicalConstants.UserCart)!)
     if (this.cart !== undefined) {
       this.store.dispatch(new StoreCart({
-        editionsAndQty: this.cart
+        editionsAndQuantity: this.cart
       }))
     }
 
     this.cart$.subscribe(res =>
       {
        this.totalPrice = 
-       res?.reduce((accumulator, current) => accumulator + current.edition?.price! * current.editionQty!, 0)!;
+       res?.reduce((accumulator, current) => accumulator + current.edition?.price! * current.editionQuantity!, 0)!;
       })
 
     this.eventEmitterService.subsVar = this.eventEmitterService.    
@@ -62,14 +62,14 @@ export class CartComponent implements OnInit {
          
   }
 
-  add(editionQty: number|null, editionId: number | null)
+  add(editionQuantity: number|null, editionId: number | null)
   {
-      this.changeCart(++editionQty!,editionId);
+      this.changeCart(++editionQuantity!,editionId);
   }
 
-  subtract(editionQty: number|null, editionId: number | null)
+  subtract(editionQuantity: number|null, editionId: number | null)
   {
-      this.changeCart(--editionQty!,editionId);
+      this.changeCart(--editionQuantity!,editionId);
   }
 
   delete(editionId: number | null)
@@ -77,13 +77,13 @@ export class CartComponent implements OnInit {
       this.changeCart(CartConstants.EmptyCart, editionId);
   }
 
-  changeCart(editionQty: number|null, editionId: number | null ) {
+  changeCart(editionQuantity: number|null, editionId: number | null ) {
     var cart: EditionInCartModel[] = JSON.parse(localStorage.getItem(TechnicalConstants.UserCart)!);
     var positionInCart = cart.findIndex(({ edition }) => edition?.id === editionId);
     var countItemsInCart:number = JSON.parse(localStorage.getItem(TechnicalConstants.CartItemsCount)!);
-    var updatedCountItemsInCart = countItemsInCart - cart[positionInCart].editionQty! + editionQty!;
+    var updatedCountItemsInCart = countItemsInCart - cart[positionInCart].editionQuantity! + editionQuantity!;
 
-    if (editionQty === TechnicalConstants.NumberDefault) {
+    if (editionQuantity === TechnicalConstants.NumberDefault) {
       Swal.fire({
         title: CartConstants.DialogDelTitle,
         text: CartConstants.DialogDelTextPaart1 + cart[positionInCart].edition?.title + CartConstants.DialogDelTextPaart2,
@@ -98,7 +98,7 @@ export class CartComponent implements OnInit {
           localStorage.setItem(TechnicalConstants.UserCart, JSON.stringify(cart));
           localStorage.setItem(TechnicalConstants.CartItemsCount, JSON.stringify(updatedCountItemsInCart))
           this.store.dispatch(new StoreCart({
-            editionsAndQty: cart
+            editionsAndQuantity: cart
           }))
           this.store.dispatch(new StoreItemsInCartCount({
             itemsInCartCount:updatedCountItemsInCart
@@ -108,11 +108,11 @@ export class CartComponent implements OnInit {
       return
     }
 
-    cart[positionInCart].editionQty = editionQty;
+    cart[positionInCart].editionQuantity = editionQuantity;
     localStorage.setItem(TechnicalConstants.UserCart, JSON.stringify(cart));
       localStorage.setItem(TechnicalConstants.CartItemsCount, JSON.stringify(updatedCountItemsInCart))
       this.store.dispatch(new StoreCart({
-        editionsAndQty: cart
+        editionsAndQuantity: cart
       }))
       this.store.dispatch(new StoreItemsInCartCount({
         itemsInCartCount:updatedCountItemsInCart

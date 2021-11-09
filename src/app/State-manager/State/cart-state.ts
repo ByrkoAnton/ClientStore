@@ -9,7 +9,7 @@ import { ClearCart, StoreCart, StoreItemsInCartCount } from "../action/cart-acti
     name: StateConstants.CartSatateName,
     defaults: {
       edition: null,
-      editionQty: StateConstants.CartDefaultEditionQty
+      editionQuantity: StateConstants.CartDefaultEditionQty
       }
 })
 
@@ -23,7 +23,7 @@ export class CartState {
     }
     @Selector()
     static getCart(state: CartModel): EditionInCartModel[] | null {
-        return state.editionsAndQty;
+        return state.editionsAndQuantity;
     }
 
     @Action(StoreItemsInCartCount)
@@ -36,14 +36,14 @@ export class CartState {
     @Action(StoreCart)
     storeCart(context: StateContext<CartModel>, action: StoreCart) {
         context.patchState({
-            editionsAndQty:action.payload.editionsAndQty
+            editionsAndQuantity:action.payload.editionsAndQuantity
         });
     }
 
     @Action(ClearCart)
     ClearCart(cartContext: StateContext<CartModel>, itemsCountContext: StateContext<ItemsInCartCount>, action: ClearCart) {
         cartContext.setState({
-            editionsAndQty:null
+            editionsAndQuantity:null
           })
           itemsCountContext.setState({
               itemsInCartCount:null

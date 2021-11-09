@@ -15,7 +15,7 @@
       <h6>Unit price</h6>
     </div>
     <div class= had-qty>
-      <h6>Qty</h6>
+      <h6>Quantity</h6>
     </div>
     <div class=had-amount>
       <h6>Amount</h6>
@@ -33,13 +33,13 @@
       <div class=price>
         <a>{{editionInCart.edition.price}}</a>
       </div>
-      <input class = change-qty-btn type="image" title="-1" (click)="subtract(editionInCart.editionQty, editionInCart.edition.id)" img src="https://img.icons8.com/material-outlined/24/000000/minus.png" width="30" height="30">
+      <input class = change-qty-btn type="image" title="-1" (click)="subtract(editionInCart.editionQuantity, editionInCart.edition.id)" img src="https://img.icons8.com/material-outlined/24/000000/minus.png" width="30" height="30">
       <div class=qty>
-        <input class = qty-input   type="number" min="1" step="1" onkeydown="return false" value={{editionInCart.editionQty}}> 
+        <input class = qty-input   type="number" min="1" step="1" onkeydown="return false" value={{editionInCart.editionQuantity}}> 
       </div>
-      <input class = change-qty-btn type="image" title="+1" (click)="add(editionInCart.editionQty, editionInCart.edition.id)" img src="https://img.icons8.com/ios-filled/30/000000/plus-math.png" width="30" height="30">  
+      <input class = change-qty-btn type="image" title="+1" (click)="add(editionInCart.editionQuantity, editionInCart.edition.id)" img src="https://img.icons8.com/ios-filled/30/000000/plus-math.png" width="30" height="30">  
       <div class=amount>
-        <a>{{editionInCart.editionQty! * editionInCart.edition.price!}}</a>
+        <a>{{editionInCart.editionQuantity! * editionInCart.edition.price!}}</a>
         <input class="del-btn" type="image" title="Delete" (click)="delete(editionInCart.edition.id)" img src="https://icons-for-free.com/iconfiles/png/512/delete+remove+trash+trash+bin+trash+can+icon-1320073117929397588.png"  width="20" height="25">
       </div>
     </ng-container>
